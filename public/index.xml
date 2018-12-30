@@ -6,10 +6,19 @@
     <description>Recent content on Jay Achar</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 08 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Dec 2018 22:40:04 +0100</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Sun, 30 Dec 2018 22:40:04 +0100</pubDate>
+      
+      <guid>/about/</guid>
+      <description>What do I do? My name is Jay Achar. I am a UK-trained medical doctor with a speciality in Infectious Diseases and Internal Medicine from Australia. I have worked for MSF UK since 2014 as a tuberculosis (TB), HIV and viral hepatitis specialist. Aside from an emergency secondment to support the organisation during the West African Ebola outbreak, my operational attention has been predominantly on drug-resistant tuberculosis and the Eastern European and Central Asian countries of the WHO Euro region.</description>
+    </item>
     
     <item>
       <title>Theme Demo</title>
@@ -81,19 +90,6 @@ Follow the following steps:
       <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
 ▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png should become
 ▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
-    </item>
-    
-    <item>
-      <title>About Hugo</title>
-      <link>/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/about/</guid>
-      <description>Hugo is a static site engine written in Go.
-It makes use of a variety of open source projects including:
- Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.
-Setup Some fun facts about Hugo:
- Built in Go Loosely inspired by Jekyll Primarily developed by spf13 on the train while commuting to and from Manhattan. Coded in Vim using spf13-vim  Have questions or suggestions?</description>
     </item>
     
   </channel>
