@@ -1,4 +1,4 @@
-baseurl = "https://jayachar.github.io/"
+baseurl = "https://keen-borg-c0a3cd.netlify.com"
 title = "Jay Achar"
 
 theme = "hugo-coder"
