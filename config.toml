@@ -1,4 +1,4 @@
-baseurl = "https://jayachar.netlify.com"
+baseurl = "https://jayachar.netlify.com/"
 title = "Jay Achar"
 
 theme = "hugo-coder"
@@ -79,7 +79,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[menu.main]]
     name = "About"
     weight = 1
-    url  = "/about/"
+    url  = "/construction/"
 [[menu.main]]
     name = "Packages"
     weight = 2
