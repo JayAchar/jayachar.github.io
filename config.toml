@@ -1,4 +1,4 @@
-baseurl = "https://jayachar.netlify.com/"
+baseurl = "https://jayachar.rbind.io/"
 title = "Jay Achar"
 
 theme = "hugo-coder"
@@ -20,6 +20,19 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [blackfriday]
   hrefTargetBlank = true
+  
+# A redirect rule for rbind.io
+[[redirects]]
+  from = "https://jayachar.netlify.com/"
+  to = "https://jay.rbind.io/"
+
+  # The default HTTP status code is 301, but you can define a different one.
+  status = 301
+
+  # By default, redirects won't be applied if there's a file with the same 
+  # path as the one defined in the `from` property. Setting `force` to `true` 
+  # will make the redirect rule take precedence over any existing files.
+  force = true  
 
 [params]
     author = "Jay Achar"
