@@ -1,0 +1,99 @@
+---
+title: Anime - Tidy Tuesday
+author: Jay Achar
+date: '2019-04-26'
+slug: anime-tidy-tuesday
+categories:
+  - dataviz
+  - rstats
+tags:
+  - tidytuesday
+---
+```{r load, echo = FALSE, message = FALSE}
+library(tidyverse)
+library(lubridate)
+```
+
+For a first blog post, I thought to jump into a great online community called [#TidyTuesday](https://thomasmock.netlify.com/post/tidytuesday-a-weekly-social-data-project-in-r/){target="_blank"} and add my own small contribution to the weekly event. 
+
+I must say that a quick search of the Twitter [hashtag](https://twitter.com/hashtag/tidytuesday?lang=en){target="_blank"} does leave you feeling quite inspired!
+
+```{r echo = FALSE}
+blogdown::shortcode("tweet", "1120670584881471488")
+```
+
+Ok - let's get started...
+
+```{r read-in, message = FALSE}
+# read in data from github
+tidy_anime <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-04-23/tidy_anime.csv")
+
+```
+
+It looks like there are `r ncol(tidy_anime)` columns and `r nrow(tidy_anime)` rows, so quite a large data set. A description of the variables can be found [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-04-23){target="_blank"}. 
+
+```{r generate-vars, echo = FALSE}
+viz_data <- tidy_anime %>% 
+  filter(!is.na(start_date)) %>% 
+  mutate(decade = year(floor_date(start_date, unit = years(10)))) 
+```
+
+
+## Which outcome variable to use?
+
+Are there any outcome variables which might be easier to work with? Something with a close to [Gaussian distribution](https://en.wikipedia.org/wiki/Normal_distribution){target=_blank} would be nice, so that a transformation is necessary. 
+
+```{r message = FALSE, warning = FALSE}
+library(gridExtra)
+library(hrbrthemes)
+
+hist_list <- viz_data %>% 
+  select(popularity, members, favorites, score) %>% 
+  map(.f = ~ {ggplot(viz_data, aes(x = .x)) + geom_density() + theme_ipsum()}) 
+
+do.call("grid.arrange", c(hist_list, ncol = 2))
+```
+
+While there's a slight skew to the left, the last plot in the bottom right seems to be the closest to a Guassian distribution. This represents how fan's scored each anime production. It's clear that that other measures of popularity are heavily skewed to the right which  isn't surprising since they are all counts compared to a score. 
+
+## Final plot
+
+It might be interesting to see whether anime is becoming more popular over time. Looking at the mean score might give us an indication, but also the number of fans voting since this would represent the level of engagement with the genre. 
+
+Let's have a look...
+
+```{r plot}
+final_data <- viz_data %>%
+  group_by(year(start_date)) %>% 
+  summarise(mean_score = mean(score, na.rm = TRUE),
+            mean_score_by = mean(scored_by, na.rm = TRUE))
+
+  ggplot(final_data, aes(x = `year(start_date)`,
+             y = mean_score,
+             size = mean_score_by)) +
+    geom_point(alpha = 0.5) +
+    geom_smooth(method = "lm", se = F, color = "red", show.legend = FALSE) +
+  scale_y_continuous(limits = c(1, 10)) +
+  labs(title = "Does anime just get better with time?",
+       caption = "Data from Tam Nguyen and MyAnimeList.net via Kaggle",
+       subtitle = "Higher mean scores and more fans voting in recent years",
+       size = "Number of fans",
+       x = "Year",
+       y = "Mean fan score (1-10 worst to best)") +
+  theme_ipsum()
+
+```
+
+Should we use a statistical test to check whether there's strong evidence within this data set against the null that there's no association between time and mean score? Why not...
+
+```{r stat-test}
+library(broom)
+lm(mean_score ~ `year(start_date)`, data = final_data) %>% 
+  tidy()
+
+```
+
+## Conclusion
+
+It does look like the mean score for productions is increasing over time. There's strong evidence of an association between mean score and time within this data set which is shown in the linear regression model and the visualisation. 
+

@@ -29,7 +29,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     avatarurl = "images/avatar.jpg"
     footercontent = ""
 
-    dateformat = "January 2, 2006"
+    dateformat = "2 January 2006"
 
     hideCredits = true
     hideCopyright = true
@@ -79,16 +79,20 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[menu.main]]
     name = "About"
     weight = 1
-    url  = "/construction/"
+    url  = "/about/"
+[[menu.main]]
+    name = "Posts"
+    weight = 2
+    url = "/post/"
 [[menu.main]]
     name = "Packages"
-    weight = 2
-    url = "/construction/"
+    weight = 3
+    url = "/"
 [[menu.main]]
     name = "Projects"
-    weight = 3
-    url = "/construction/"
+    weight = 4
+    url = "/"
 [[menu.main]]
     name = "Contact"
     weight = 5
-    url = "/construction/"
+    url = "/"
