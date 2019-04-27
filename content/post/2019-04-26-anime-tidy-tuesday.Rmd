@@ -5,7 +5,6 @@ date: '2019-04-26'
 slug: tt-19-17-anime
 categories:
   - dataviz
-  - rstats
 tags:
   - tidytuesday
 ---
