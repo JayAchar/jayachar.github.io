@@ -8,6 +8,7 @@ disqusShortname         = ""
 googleAnalytics         = ""
 pluralizeListTitles     = false
 disableLanguages        = [""]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
   author = "Jay Achar"
@@ -60,13 +61,13 @@ disableLanguages        = [""]
   [params.intro]
     header                = "Jay Achar"
     paragraph             = "Infectious Diseases Specialist<br>Tuberculosis, HIV, Global Health<br>Data driven"
-    rssIntro              = true
+    rssIntro              = false
     socialIntro           = true
 
     # This appears at the top of the sidebar above params.intro.header.
     # A width of less than 100px is recommended from a design perspective.
     [params.intro.pic]
-      src                 = "/img/main/logo.jpg"
+      src                 = "/img/temp_image.jpg"
       # Masks image in a certain shape. Supported are circle, triangle, diamond, and hexagon.
       shape               = "circle"
       width               = "80px"
