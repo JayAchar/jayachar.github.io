@@ -3,7 +3,7 @@ title = "Jay Achar"
 
 theme = "hugo-coder"
 
-languagecode = "en"
+DefaultContentLanguage = "en"
 
 googleAnalytics = "UA-128985004-3"
 
