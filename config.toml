@@ -46,7 +46,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     custom_css = []
 
 [permalinks]
-  post = "/post/:year/:slug/"
+  posts = "/posts/:year/:slug/"
 
 [toxonomies]
   category = "categories"
@@ -90,7 +90,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[menu.main]]
     name = "Posts"
     weight = 2
-    url = "/post/"
+    url = "/posts/"
 [[menu.main]]
     name = "Packages"
     weight = 3
