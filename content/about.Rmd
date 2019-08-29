@@ -9,5 +9,4 @@ My name is Jay Achar. I am a UK-trained medical doctor with a speciality in Infe
 
 I'm passionate about access to healthcare, people-centredness and the bioethical concepts of equity and justice. In the field of TB, I work hard to improve our knowledge on the epidemiology, diagnosis and treatment of drug-resistant TB. 
 
-In addition to my medical degree from [University College London](http://www.ucl.ac.uk), I am also a Fellow of the [Royal Australasian College of  Physicians](https://www.racp.edu.au). I was awarded a Diploma of Tropical Medicine and Hygiene (DTM&H) by the [Royal College of Physicians](https://www.rcplondon.ac.uk) and have completed a MSc in Epidmiology at the [London School of Hygiene and Tropical Medicine](http://www.lshtm.ac.uk). 
-
+In addition to my medical degree from <a href="http://www.ucl.ac.uk/" target="_blank">University College London</a>, I am also a Fellow of the <a href="https://www.racp.edu.au" target="_blank">Royal Australasian College of Physicians</a>. I was awarded a Diploma of Tropical Medicine and Hygiene (DTM&H) by the <a href="https://www.rcplondon.ac.uk" target="_blank">Royal College of Physicians</a> and have completed a MSc in Epidmiology at the <a href="https://www.lshtm.ac.uk" target="_blank">London School of Hygiene and Tropical Medicine</a>. 
