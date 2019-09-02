@@ -1,0 +1,12 @@
+<article class="post">
+  {{ .Render "header" }}
+  {{ .Render "featured" }}
+  <div class="content">
+    {{ .Content }}
+  </div>
+  <footer>
+    {{ .Render "stats" }}
+  </footer>
+</article>
+{{ .Render "comments" }}
+{{ .Render "pagination" }}
