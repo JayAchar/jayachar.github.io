@@ -24,7 +24,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   highlightjsTheme      = "github"
   highlightjsLang       = ["html", "css", "js", "toml"]
   # Sets where "View More Posts" links to
-  viewMorePostsLink     = "/blog/"
+  viewMorePostsLink     = "/post/"
   # Activate Estimated Reading Times, which appear in the post headers
   readingTime           = true
   # Sets which Social Share links appear in posts.
@@ -67,14 +67,14 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     # This appears at the top of the sidebar above params.intro.header.
     # A width of less than 100px is recommended from a design perspective.
     [params.intro.pic]
-      src                 = "/img/temp_image.jpg"
+      src                 = "/img/low_res_headshot.jpg"
       # Masks image in a certain shape. Supported are circle, triangle, diamond, and hexagon.
       shape               = "circle"
-      width               = "80px"
+      width               = "100px"
       alt                 = "Jay Achar"
 
   [params.sidebar]
-    about               = "test"
+    about               = "I'm an Infectious Diseases specialist doctor and epidemiologist with keen interests in tuberculosis, data-driven programming and research."
     # Sets the number of recent posts to show in the sidebar. The default value is 5.
     postAmount          = 5
     # set to show or to hide categories in the sidebar
@@ -126,7 +126,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   [[menu.main]]
     name              = "Blog"
     identifier        = "blog"
-    url               = "/posts/"
+    url               = "/post/"
     pre               = "<i class='far fa-newspaper'></i>"
     weight            = 3
 
