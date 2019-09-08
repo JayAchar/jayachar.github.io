@@ -5,6 +5,8 @@
         {{ if .Site.Params.footer.socialFooter }}{{ partial "socnet-icon" . }}{{ end }}
       </ul>
   {{ end }}
+
+  <p class="update-date">Site updated: {{ (i18n "date_format") | now.Format }}</p>
   <p class="copyright">
     {{ with .Site.Copyright | safeHTML }}
       {{ . }}
