@@ -651,7 +651,8 @@ textarea {
 
  /* Copied from other blocks for reply and 'x' buttons */
  .button {
-   margin: .25em 0;
+   margin-left: auto;
+   margin-right: auto;
    background-color: transparent;
    border: solid 1px rgba(160, 160, 160, 0.3);
    color: #3c3b3b;
@@ -1060,10 +1061,10 @@ textarea {
    }
    > div, > p {
      @include for-desktop-up {
-      margin: 0 1em;
+      margin: 16px 1em;
     }
      @include for-big-desktop-up {
-       margin: 0 4em;
+       margin: 16px 4em;
      }
    }
    > div > p, > p {
@@ -1609,8 +1610,8 @@ textarea {
 
  #site-footer{
    border-top: solid 1px rgba(160,160,160,0.3);
-   margin: 3em 2em 0 2em;
-   padding-top: 3em;
+   margin: 32px 32px 0 32px;
+   padding-top: 16px;
    .copyright {
      color: #aaaaaa;
      font-family: "Raleway", Helvetica, sans-serif;
