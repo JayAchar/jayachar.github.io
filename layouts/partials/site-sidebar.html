@@ -4,7 +4,7 @@
       <header>
         <h1><a href="{{ "post" | relLangURL }}">{{ i18n "recent_posts" }}</a></h1>
       </header>
-      {{ range first (.Site.Params.sidebar.postAmount | default 5) (where .Site.Pages  "Type" "post") }}
+      {{ range first (.Site.Params.sidebar.postAmount | default 5) (where site.RegularPages  "Type" "post") }}
       <article class="mini-post">
         <section>
           {{ .Render "featured" }}
