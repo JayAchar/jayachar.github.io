@@ -310,7 +310,13 @@ textarea {
 
  #categories {
      > ul {
-         > li > a {
+         > p {
+             display: inline;
+             margin-left: 2px;
+             margin-right: 2px;     
+         }
+         > p > a {
+
              border: solid 1px;
              border-radius: 5px;
              padding: 4px 6px;
@@ -320,6 +326,7 @@ textarea {
              font-size: 10px;
          }
          padding-inline-start: 10px;
+
      }
  }
  /* Button */

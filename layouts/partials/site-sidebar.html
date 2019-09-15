@@ -34,14 +34,14 @@
             {{ $.Scratch.Set "categories" .Site.Taxonomies.categories.Alphabetical }}
           {{ end }}
           {{ range $key, $value := $.Scratch.Get "categories" }}
-          <li>
+          <p>
             {{ if ne $value.Name "" }}
               <a href="{{ printf "%s/%s" "categories" $value.Name | urlize | relLangURL }}/">{{ $value.Name }}</a>
             {{ else }}
               {{ i18n "uncategorized" }}<span class="count">{{ $value.Count }}</span>
             {{ end }}
           {{ end }}
-          </li>
+          </p>
         </ul>
       </section>
     {{ end }}
