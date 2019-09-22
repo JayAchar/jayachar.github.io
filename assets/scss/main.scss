@@ -288,7 +288,11 @@ textarea {
     }
 }
 
+// CSS for CV page
 @import "cv-css";
+
+// CSS for packages list page
+@import "packages";
 
  #categories {
      > ul {
