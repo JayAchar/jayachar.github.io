@@ -1,0 +1,79 @@
+// CSS for R specific outputs
+
+.r-table {
+    > table {
+        width: 90%;
+        max-width: 90%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        box-shadow: none;
+        >thead {
+            display: table-header-group;
+            background-color: #ececec;
+        }
+        >tbody {
+            display: table-row-group;
+            >tr {
+                display: table-row;
+                >td:first-child {
+                    font-weight: 400;
+                }
+                >td {
+                    display: table-cell;
+                    text-align: center;
+
+                    &[data-header]:before {
+                        display: none;
+                    }
+
+                    &:first-child {
+                        text-align: left;
+                        background-color: unset;
+
+
+                    &:after {
+                        display: none;
+                    }
+                }
+                    &:not(:first-child) {
+                        border: 0;
+                        opacity: 100;
+                        position: relative;
+                        z-index: 0;
+                    }
+
+
+            }
+
+            >tr:nth-child(even) {
+                background-color: inherit;
+            }
+            >tr:nth-child(odd) {
+                background-color: inherit;
+            }
+        }
+    }
+}
+}
+
+@media (min-width: 768px) {
+    .r-table {
+        > table {
+            >tbody {
+                >tr {
+                    >td:first-child {
+                        text-align: left;
+                    }
+
+                }
+                >tr:nth-child(even) {
+                    background-color: inherit;
+                }
+                >tr:nth-child(odd) {
+                    background-color: inherit;
+                }
+            }
+
+        }
+    }
+}
