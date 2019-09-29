@@ -288,6 +288,9 @@ textarea {
 // CSS for packages list page
 @import "packages";
 
+// CSS for R specific outputs
+@import "r-output";
+
  #categories {
      > ul {
          > p {
@@ -308,10 +311,6 @@ textarea {
          padding-inline-start: 10px;
 
      }
- }
-
- .tweet-card {
-     text-align: center;
  }
 
 

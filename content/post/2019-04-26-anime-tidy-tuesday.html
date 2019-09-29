@@ -12,7 +12,7 @@ tags:
 
 
 <p>For a first blog post, I thought to jump into a great online community called <a href="https://thomasmock.netlify.com/post/tidytuesday-a-weekly-social-data-project-in-r/" target="_blank">#TidyTuesday</a> and add my own small contribution to the weekly event.</p>
-<p>I must say that a quick search of the Twitter <a href="https://twitter.com/hashtag/tidytuesday?lang=en" target="_blank">hashtag</a> does leave you feeling quite inspired!</p>
+I must say that a quick search of the Twitter <a href="https://twitter.com/hashtag/tidytuesday?lang=en" target="_blank">hashtag</a> does leave you feeling quite inspired!
 {{% tweet "1120670584881471488" %}}
 <p>Ok - let’s get started…</p>
 <pre class="r"><code># read in data from github
@@ -24,9 +24,9 @@ tidy_anime &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/rfordat
 <pre class="r"><code>library(gridExtra)
 library(hrbrthemes)
 
-hist_list &lt;- viz_data %&gt;% 
-  select(popularity, members, favorites, score) %&gt;% 
-  map(.f = ~ {ggplot(viz_data, aes(x = .x)) + geom_density() + theme_ipsum()}) 
+hist_list &lt;- viz_data %&gt;%
+  select(popularity, members, favorites, score) %&gt;%
+  map(.f = ~ {ggplot(viz_data, aes(x = .x)) + geom_density() + theme_ipsum()})
 
 do.call(&quot;grid.arrange&quot;, c(hist_list, ncol = 2))</code></pre>
 <p><img src="/post/2019-04-26-anime-tidy-tuesday_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
@@ -37,7 +37,7 @@ do.call(&quot;grid.arrange&quot;, c(hist_list, ncol = 2))</code></pre>
 <p>It might be interesting to see whether anime is becoming more popular over time. Looking at the mean score might give us an indication, but also the number of fans voting since this would represent the level of engagement with the genre.</p>
 <p>Let’s have a look…</p>
 <pre class="r"><code>final_data &lt;- viz_data %&gt;%
-  group_by(year(start_date)) %&gt;% 
+  group_by(year(start_date)) %&gt;%
   summarise(mean_score = mean(score, na.rm = TRUE),
             mean_score_by = mean(scored_by, na.rm = TRUE))
 
@@ -57,7 +57,7 @@ do.call(&quot;grid.arrange&quot;, c(hist_list, ncol = 2))</code></pre>
 <p><img src="/post/2019-04-26-anime-tidy-tuesday_files/figure-html/plot-1.png" width="672" /></p>
 <p>Should we use a statistical test to check whether there’s strong evidence within this data set against the null that there’s no association between time and mean score? Why not…</p>
 <pre class="r"><code>library(broom)
-lm(mean_score ~ `year(start_date)`, data = final_data) %&gt;% 
+lm(mean_score ~ `year(start_date)`, data = final_data) %&gt;%
   tidy()</code></pre>
 <pre><code>## # A tibble: 2 x 5
 ##   term               estimate std.error statistic  p.value
