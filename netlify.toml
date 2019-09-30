@@ -11,7 +11,7 @@
   publish = "public"
 
 # Default build command.
-  command = "echo 'default context'"
+  command = "hugo"
 # command = "hugo --gc --minify"
 
 [context.production.environment]
@@ -51,3 +51,4 @@ HUGO_ENABLEGITINFO = "true"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=2592000"
     Feature-Policy = "vibrate 'none'; geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none'"
+    X-Content-Type-Options = "nosniff" 
