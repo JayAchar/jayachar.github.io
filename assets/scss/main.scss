@@ -1112,31 +1112,34 @@ textarea {
    > div > p, > p {
      text-align: justify;
    }
-   a {
-     &.image {
-       border: 0;
-       display: block;
-       margin: 1em -1em;
-       overflow: hidden;
-       &:hover {
-         img {
-           -webkit-transform: scale(1.05);
-           -moz-transform: scale(1.05);
-           -ms-transform: scale(1.05);
-           -o-transform: scale(1.05);
-           transform: scale(1.05);
-         }
-       }
-       img {
-         -webkit-transition: -webkit-transform 0.2s ease-out;
-         -moz-transition: -moz-transform 0.2s ease-out;
-         -ms-transition: -ms-transform 0.2s ease-out;
-         -o-transition: -ms-transform 0.2s ease-out;
-         transition: transform 0.2s ease-out;
-         width: 100%;
-       }
-     }
-   }
+   // a {
+   //   &.image {
+   //     border: 0;
+   //     display: block;
+   //     margin: 1em -1em;
+   //     overflow: hidden;
+   //     &:hover {
+   //       img {
+   //         -webkit-transform: scale(1.05);
+   //         -moz-transform: scale(1.05);
+   //         -ms-transform: scale(1.05);
+   //         -o-transform: scale(1.05);
+   //         transform: scale(1.05);
+   //         filter: brightness(100%);
+   //       }
+   //     }
+   //     img {
+   //       -webkit-transition: -webkit-transform 0.2s ease-out;
+   //       -moz-transition: -moz-transform 0.2s ease-out;
+   //       -ms-transition: -ms-transform 0.2s ease-out;
+   //       -o-transition: -ms-transform 0.2s ease-out;
+   //       transition: transform 0.3s ease-out;
+   //       transition: filter 0.3s ease-out;
+   //       width: 100%;
+   //       filter: brightness(50%);
+   //     }
+   //   }
+   // }
    > footer {
      display: flex;
      flex-direction: column;
@@ -1211,6 +1214,10 @@ textarea {
      }
    }
  }
+
+/* Images */
+@import "images";
+
 
  /* Pagination */
 

@@ -3,6 +3,8 @@ title: Tabulation in R
 author: Jay Achar
 date: '2019-09-29'
 slug: tabulation-in-r
+featured: "train.jpg"
+featuredalt: "metro train"
 categories:
   - reporting
 tags:
@@ -49,7 +51,7 @@ str(mockstudy)    # show structure of data</code></pre>
 <h1>tableby</h1>
 <p>The <code>tableby</code> function is designed to generate summary statistics, stratified by groups if required, and output them in Rmarkdown format. I’ll focus on this function within this post, because there’s a lot to dig into.</p>
 <p>The function requires a formula to define which variables to output in the table. A very simple example is shown below where a table summarising two variables - age and sex - is generated.</p>
-<pre class="r"><code>table_simple &lt;- tableby(formula = ~ age + sex, 
+<pre class="r"><code>table_simple &lt;- tableby(formula = ~ age + sex,
              data = mockstudy)
 
 summary(table_simple)</code></pre>
@@ -101,7 +103,7 @@ summary(table_simple)</code></pre>
 </table>
 </div>
 <p>The output can also be easily stratified by a designated group by adjusting the formula provided:</p>
-<pre class="r"><code>table_bivar &lt;- tableby(formula = sex ~ age + ast + bmi, 
+<pre class="r"><code>table_bivar &lt;- tableby(formula = sex ~ age + ast + bmi,
              data = mockstudy)
 
 summary(table_bivar)</code></pre>
@@ -213,7 +215,7 @@ control_options &lt;- tableby.control(
   )
 
 # create output table using formula
-table_options &lt;- tableby(formula = sex ~ race + age.ord + bmi, 
+table_options &lt;- tableby(formula = sex ~ race + age.ord + bmi,
                          data = mockstudy,
                          control = control_options)
 
