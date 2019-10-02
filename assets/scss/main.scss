@@ -293,29 +293,23 @@ textarea {
 
  #categories {
      > ul {
-       padding-inline-start: 0.3em;
          > p {
              display: inline;
              margin-left: 2px;
              margin-right: 2px;
-             > a {
-                 border: solid 1px rgba($border-color, 0.5);
-                 border-radius: 5px;
-                 padding: 0.3em 0.3em;
-                 font-family: "Raleway", Helvetica, sans-serif;
-                 font-weight: 500;
-                 text-transform: uppercase;
-                 font-size: 0.5em;
-                 letter-spacing: 0.25em;
-                 &:hover {
-                   border: solid 1px $accent-color;
-                   color: $accent-color !important;
-                   &:active {
-                     background-color: rgba(46, 186, 174, 0.05);
-                   }
-                }   
-             }
          }
+         > p > a {
+
+             border: solid 1px;
+             border-radius: 5px;
+             padding: 4px 6px;
+             font-family: "Raleway", Helvetica, sans-serif;
+             font-weight: 400;
+             text-transform: uppercase;
+             font-size: 10px;
+         }
+         padding-inline-start: 10px;
+
      }
  }
 
@@ -332,13 +326,13 @@ textarea {
    cursor: pointer;
    display: inline-block;
    font-family: "Raleway", Helvetica, sans-serif;
-   font-size: 0.8em;
+   font-size: 0.6em;
    font-weight: 800;
-   height: 4.1em;
+   height: 4.8125em;
    letter-spacing: 0.25em;
-   line-height: 4.1em;
+   line-height: 4.8125em;
    margin: auto;
-   padding: 0 1.5em;
+   padding: 0 2em;
    -moz-transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
    -webkit-transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
    -ms-transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
@@ -1623,21 +1617,15 @@ textarea {
        .image {
          &:hover {
            img {
-             -moz-transform: scale(1.05);
-             -webkit-transform: scale(1.05);
-             -ms-transform: scale(1.05);
-             transform: scale(1.05);
+             filter:saturate(100%);
            }
          }
          img {
            display: block;
            height: 100%;
            margin: 0;
-           -moz-transition: -moz-transform 0.2s ease-out;
-           -webkit-transition: -webkit-transform 0.2s ease-out;
-           -ms-transition: -ms-transform 0.2s ease-out;
-           transition: transform 0.2s ease-out;
-           width: 100%;
+           filter: saturate(10%);
+           transition: transform 0.5s ease-out, filter 0.8s ease-out;
          }
        }
      }
@@ -1699,7 +1687,6 @@ textarea {
      flex-wrap: wrap;
      justify-content: center;
      padding-left: 0;
-     font-size: 1.1em;
      li {
        margin: 0 .5em;
        min-width: 20px;
