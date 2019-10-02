@@ -15,10 +15,10 @@
 # command = "hugo --gc --minify"
 
 [context.production.environment]
-HUGO_VERSION = "0.53"
+HUGO_VERSION = "0.54"
 HUGO_ENV = "production"
 HUGO_ENABLEGITINFO = "true"
-
+RUBY_VERSION = "2.6.2"
 # [context.split1]
 # command = "hugo --gc --minify --enableGitInfo"
 #
@@ -51,4 +51,4 @@ HUGO_ENABLEGITINFO = "true"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=2592000"
     Feature-Policy = "vibrate 'none'; geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none'"
-    X-Content-Type-Options = "nosniff" 
+    X-Content-Type-Options = "nosniff"
