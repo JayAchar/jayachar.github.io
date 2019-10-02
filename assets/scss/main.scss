@@ -300,15 +300,23 @@ textarea {
          }
          > p > a {
 
-             border: solid 1px;
+             border: solid 1px rgba($border-color, 0.5);
              border-radius: 5px;
-             padding: 4px 6px;
+             padding: 0.3em 0.5em;
              font-family: "Raleway", Helvetica, sans-serif;
-             font-weight: 400;
+             font-weight: 500;
              text-transform: uppercase;
-             font-size: 10px;
+             font-size: 0.5em;
+             letter-spacing: 0.25em;
+             &:hover {
+               border: solid 1px $accent-color;
+               color: $accent-color !important;
+               &:active {
+                 background-color: rgba(46, 186, 174, 0.05);
+               }
+             }
          }
-         padding-inline-start: 10px;
+         padding-inline-start: 0.3em;
 
      }
  }
@@ -1112,31 +1120,34 @@ textarea {
    > div > p, > p {
      text-align: justify;
    }
-   a {
-     &.image {
-       border: 0;
-       display: block;
-       margin: 1em -1em;
-       overflow: hidden;
-       &:hover {
-         img {
-           -webkit-transform: scale(1.05);
-           -moz-transform: scale(1.05);
-           -ms-transform: scale(1.05);
-           -o-transform: scale(1.05);
-           transform: scale(1.05);
-         }
-       }
-       img {
-         -webkit-transition: -webkit-transform 0.2s ease-out;
-         -moz-transition: -moz-transform 0.2s ease-out;
-         -ms-transition: -ms-transform 0.2s ease-out;
-         -o-transition: -ms-transform 0.2s ease-out;
-         transition: transform 0.2s ease-out;
-         width: 100%;
-       }
-     }
-   }
+   // a {
+   //   &.image {
+   //     border: 0;
+   //     display: block;
+   //     margin: 1em -1em;
+   //     overflow: hidden;
+   //     &:hover {
+   //       img {
+   //         -webkit-transform: scale(1.05);
+   //         -moz-transform: scale(1.05);
+   //         -ms-transform: scale(1.05);
+   //         -o-transform: scale(1.05);
+   //         transform: scale(1.05);
+   //         filter: brightness(100%);
+   //       }
+   //     }
+   //     img {
+   //       -webkit-transition: -webkit-transform 0.2s ease-out;
+   //       -moz-transition: -moz-transform 0.2s ease-out;
+   //       -ms-transition: -ms-transform 0.2s ease-out;
+   //       -o-transition: -ms-transform 0.2s ease-out;
+   //       transition: transform 0.3s ease-out;
+   //       transition: filter 0.3s ease-out;
+   //       width: 100%;
+   //       filter: brightness(50%);
+   //     }
+   //   }
+   // }
    > footer {
      display: flex;
      flex-direction: column;
@@ -1211,6 +1222,10 @@ textarea {
      }
    }
  }
+
+/* Images */
+@import "images";
+
 
  /* Pagination */
 
@@ -1610,21 +1625,15 @@ textarea {
        .image {
          &:hover {
            img {
-             -moz-transform: scale(1.05);
-             -webkit-transform: scale(1.05);
-             -ms-transform: scale(1.05);
-             transform: scale(1.05);
+             filter:saturate(100%);
            }
          }
          img {
            display: block;
            height: 100%;
            margin: 0;
-           -moz-transition: -moz-transform 0.2s ease-out;
-           -webkit-transition: -webkit-transform 0.2s ease-out;
-           -ms-transition: -ms-transform 0.2s ease-out;
-           transition: transform 0.2s ease-out;
-           width: 100%;
+           filter: saturate(10%);
+           transition: transform 0.5s ease-out, filter 0.8s ease-out;
          }
        }
      }
@@ -1686,6 +1695,7 @@ textarea {
      flex-wrap: wrap;
      justify-content: center;
      padding-left: 0;
+     font-size: 1.1em;
      li {
        margin: 0 .5em;
        min-width: 20px;

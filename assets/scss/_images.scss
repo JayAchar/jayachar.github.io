@@ -1,0 +1,29 @@
+/* Images */
+
+a {
+  &.image {
+    border: 0;
+    display: block;
+    margin: 1em -1em;
+    overflow: hidden;
+    &:hover {
+      img {
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05);
+        filter: brightness(100%);
+      }
+    }
+    img {
+      -webkit-transition: -webkit-transform 0.5s ease-out, -webkit-filter 0.8s ease-out;
+      -moz-transition: -moz-transform 0.5s ease-out, -moz-filter 0.8s ease-out;
+      -ms-transition: -ms-transform 0.5s ease-out, -ms-filter 0.8s ease-out;
+      -o-transition: -ms-transform 0.5s ease-out, -ms-filter 0.8s ease-out;
+      transition: transform 0.5s ease-out, filter 0.8s ease-out;
+      width: 100%;
+      filter: brightness(90%);
+    }
+  }
+}
