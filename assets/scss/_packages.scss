@@ -1,21 +1,45 @@
 // CSS for packages page
 
-.package-box {
-    border: solid 1px rgba($border-color, 0.6);
-    padding: 0.5em 1.5em 1.5em 1.5em;
-    margin: 0.75em;
-
-    &:hover {
-      border: solid 1px $accent-color;
-      cursor: pointer;
-      .package-description,
-      .package-name {
-        color: $accent-color;
-      }
-
-
-      // &:active {
-      //   background-color: rgba(46, 186, 174, 0.05);
-      // }
+.packages {
+    .package-list {
+        display: block;
+        width: 100%;
+        list-style-type: none;
+        .package-item {
+            border: solid 1px rgba($border-color, 0.6);
+            padding: 0.5em 1.5em;
+            margin: 0.75em;
+            position: relative;
+            overflow: hidden;
+            -webkit-transition: color 1s ease-out;
+            -moz-transition: color 1s ease-out;
+            -ms-transition: color 1s ease-out;
+            -o-transition: color 1s ease-out;
+            transition: color 1s ease-out;
+            &:hover {
+                border: solid 1px $accent-color;
+                cursor: pointer;
+                .package-name,
+                .package-description {
+                    color: $accent-color;
+                }
+                &::before {
+                    opacity: 0.5;
+                }
+            }
+            &:active {
+                background-color: rgba(46, 186, 174, 0.05);
+            }
+            &::before {
+                content: "\f4f7";
+                font-family: "Font Awesome 5 Brands";
+                font-size: 10em;
+                position: absolute;
+                right: 5%;
+                top: 40%;
+                opacity: 0.05;
+                transition: opacity 1s ease-out;
+            }
+        }
     }
 }
