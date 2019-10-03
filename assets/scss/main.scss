@@ -21,58 +21,13 @@
 // Colors
 @import "colors";
 
+// Fonts
+@import "fonts";
+
  /* ==========================================================================
     Breakpoints
     ========================================================================== */
-
-
- @mixin for-mobile-m-up {
-   @media (min-width: 320px) {
-     @content;
-   }
- }
-
- @mixin for-mobile-l-up {
-   @media (min-width: 375px) {
-     @content;
-   }
- }
-
- @mixin for-tall {
-   @media (min-height: 600px) {
-     @content;
-   }
- }
-
- @mixin for-tablet-up {
-   @media (min-width: 425px) {
-     @content;
-   }
- }
-
- @mixin for-laptop-up {
-   @media (min-width: 768px) {
-     @content;
-   }
- }
-
- @mixin for-desktop-up {
-   @media (min-width: 1024px) {
-     @content;
-   }
- }
-
- @mixin for-big-desktop-up {
-   @media (min-width: 1440px) {
-     @content;
-   }
- }
-
- @mixin for-bigger-desktop-up {
-   @media (min-width: 1800px) {
-     @content;
-   }
- }
+@import "mixins";
 
 /* ==========================================================================
    Base styles: opinionated defaults
@@ -185,7 +140,7 @@ textarea {
 
  body, input, select, textarea {
    color: #333333;
-   font-family: "Source Sans Pro", Helvetica, sans-serif;
+   font-family: $type-font;
    line-height: 1.75em;
  }
 
@@ -199,11 +154,7 @@ textarea {
    -o-transition: color .2s ease, border-bottom-color 0.2s ease;
    transition: color .2s ease, border-bottom-color 0.2s ease;
    &:before {
-     -webkit-transition: color ease;
-     -moz-transition: color ease;
-     -ms-transition: color ease;
-     -o-transition: color ease;
-     transition: color ease;
+       @include vendor-prefix-transition(color, $timing: ease)
    }
    &:hover {
      border-bottom-color: transparent;
@@ -213,7 +164,7 @@ textarea {
 
  h1, h2, h3, h4, h5, h6 {
    color: $title-color;
-   font-family: "Raleway", Helvetica, sans-serif;
+   font-family: $general_font;
    letter-spacing: 0.25em;
    line-height: 1.65;
    text-transform: uppercase;
@@ -234,7 +185,7 @@ textarea {
 
  code {
    border: solid 1px rgba($border-color, 0.3);
-   font-family: "Courier New", monospace;
+   font-family: $code_font;
    font-size: 0.9em;
    background: #f8f8f8;
    margin: 0 0.25em;
@@ -254,7 +205,7 @@ textarea {
 
  pre {
    display: table;
-   font-family: "Courier New", monospace;
+   font-family: $code_font;
    font-size: 0.9em;
    table-layout: fixed;
    width: 100%;
@@ -303,7 +254,7 @@ textarea {
              border: solid 1px rgba($border-color, 0.5);
              border-radius: 5px;
              padding: 0.3em 0.5em;
-             font-family: "Raleway", Helvetica, sans-serif;
+             font-family: $general_font;
              font-weight: 500;
              text-transform: uppercase;
              font-size: 0.5em;
@@ -333,7 +284,7 @@ textarea {
    color: $title-color;
    cursor: pointer;
    display: inline-block;
-   font-family: "Raleway", Helvetica, sans-serif;
+   font-family: $general_font;
    font-size: 0.6em;
    font-weight: 800;
    height: 4.8125em;
@@ -375,11 +326,7 @@ textarea {
  	width: 100%;
    &:hover {
   	border-color: $accent-color;
- 		-webkit-transition:border-color 0.3s ease-in-out;
- 		-moz-transition:border-color 0.3s ease-in-out;
-    -ms-transition: border-color 0.3s ease-in-out;
-    -o-transition: border-color 0.3s ease-in-out;
- 		transition:border-color 0.3s ease-in-out;
+    @include vendor-prefix-transition(border-color, 0.3s, ease-in-out);
  	}
    &:focus, &:active {
  		border: solid 1px $accent-color;
@@ -410,11 +357,7 @@ textarea {
    -o-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
    margin: 1em auto;
-   -webkit-transition: all 0.5s ease;
-   -moz-transition: all 0.5s ease;
-   -ms-transition: all 0.5s ease;
-   -o-transition: all 0.5s ease;
-   transition: all 0.5s ease;
+   @include vendor-prefix-transition(all, 0.5s, ease)
    width: 75%;
    @include for-laptop-up {
  		width: 90%;
@@ -478,11 +421,7 @@ textarea {
            border-bottom: 1px solid #e0e0e0;
            opacity: 0;
            position: absolute;
-           -moz-transition: none;
-           -ms-transition: none;
-           -o-transition: none;
-           -webkit-transition: none;
-           transition: none;
+           @include vendor-prefix-transition(none);
            z-index: -1;
            @include for-laptop-up {
              border: 0;
@@ -501,11 +440,7 @@ textarea {
          &:not(:first-child) {
            opacity: 1;
            position: relative;
-           -webkit-transition: all 0.3s ease;
-           -moz-transition: all 0.3s ease;
-           -ms-transition: all 0.3s ease;
-           -o-transition: all 0.3s ease;
-           transition: all 0.3s ease;
+           @include vendor-prefix-transition(all, 0.3s, ease);
            z-index: auto;
          }
          &:last-child {
@@ -708,7 +643,7 @@ textarea {
    color: $title-color;
    cursor: pointer;
    display: inline-block;
-   font-family: "Raleway", Helvetica, sans-serif;
+   font-family: $general_font;
    font-weight: 800;
    -moz-transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
    -webkit-transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
@@ -1095,14 +1030,14 @@ textarea {
          width: 17em;
        }
        .published {
-         font-family: "Raleway", Helvetica, sans-serif;
+         font-family: $general_font;
          font-size: 0.7em;
          font-weight: 800;
          letter-spacing: 0.25em;
          text-transform: uppercase;
        }
        p, .author, .format {
-         font-family: "Raleway", Helvetica, sans-serif;
+         font-family: $general_font;
          font-size: 0.6em;
          letter-spacing: 0.25em;
          text-transform: uppercase;
@@ -1120,34 +1055,7 @@ textarea {
    > div > p, > p {
      text-align: justify;
    }
-   // a {
-   //   &.image {
-   //     border: 0;
-   //     display: block;
-   //     margin: 1em -1em;
-   //     overflow: hidden;
-   //     &:hover {
-   //       img {
-   //         -webkit-transform: scale(1.05);
-   //         -moz-transform: scale(1.05);
-   //         -ms-transform: scale(1.05);
-   //         -o-transform: scale(1.05);
-   //         transform: scale(1.05);
-   //         filter: brightness(100%);
-   //       }
-   //     }
-   //     img {
-   //       -webkit-transition: -webkit-transform 0.2s ease-out;
-   //       -moz-transition: -moz-transform 0.2s ease-out;
-   //       -ms-transition: -ms-transform 0.2s ease-out;
-   //       -o-transition: -ms-transform 0.2s ease-out;
-   //       transition: transform 0.3s ease-out;
-   //       transition: filter 0.3s ease-out;
-   //       width: 100%;
-   //       filter: brightness(50%);
-   //     }
-   //   }
-   // }
+
    > footer {
      display: flex;
      flex-direction: column;
@@ -1195,7 +1103,7 @@ textarea {
            padding: 0 0 0 1em;
            li {
              visibility: visible;
-             font-family: "Raleway", Helvetica, sans-serif;
+             font-family: $general_font;
              font-size: 0.6em;
              font-weight: 400;
              letter-spacing: 0.25em;
@@ -1260,7 +1168,7 @@ textarea {
    a {
      border: 0;
      border-left: 1px solid rgba($border-color, 0.3);
-     font-family: "Raleway", Helvetica, sans-serif;
+     font-family: $general_font;
      font-size: 0.7em;
      font-weight: 400;
      letter-spacing: 0.25em;
@@ -1314,11 +1222,7 @@ textarea {
        margin: 0;
        overflow: auto;
        position: static;
-       -webkit-transition: none;
-       -moz-transition: none;
-       -ms-transition: none;
-       -o-transition: none;
-       transition: none;
+       @include vendor-prefix-transition(none);
        white-space: nowrap;
        &::-webkit-scrollbar {
          height: .25em;
@@ -1424,11 +1328,7 @@ textarea {
      span {
        display: inline-block;
        font-size: 1.75em;
-       -webkit-transition: box-shadow 0.2s ease;
-       -moz-transition: box-shadow 0.2s ease;
-       -ms-transition: box-shadow 0.2s ease;
-       -o-transition: box-shadow 0.2s ease;
-       transition: box-shadow 0.2s ease;
+       @include vendor-prefix-transition(box-shadow, 0.2s, ease);
        vertical-align: middle;
      }
    }
@@ -1459,11 +1359,7 @@ textarea {
      span {
        display: inline-block;
        font-size: 1.75em;
-       -webkit-transition: box-shadow 0.2s ease;
-       -moz-transition: box-shadow 0.2s ease;
-       -ms-transition: box-shadow 0.2s ease;
-       -o-transition: box-shadow 0.2s ease;
-       transition: box-shadow 0.2s ease;
+       @include vendor-prefix-transition(box-shadow, 0.2s, ease);
        vertical-align: middle;
        &:hover {
          box-shadow: inset 0 0 0 100px rgba(46, 187, 170, .5);
@@ -1606,7 +1502,7 @@ textarea {
        }
        .published {
          display: block;
-         font-family: "Raleway", Helvetica, sans-serif;
+         font-family: $general_font;
          font-size: 0.6em;
          font-weight: 400;
          letter-spacing: 0.25em;
@@ -1665,7 +1561,7 @@ textarea {
    padding-top: 1em;
    .copyright, .update-date {
      color: #aaaaaa;
-     font-family: "Raleway", Helvetica, sans-serif;
+     font-family: $general_font;
      font-size: 0.5em;
      font-weight: 400;
      letter-spacing: 0.25em;

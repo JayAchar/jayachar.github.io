@@ -11,11 +11,23 @@
             margin: 0.75em;
             position: relative;
             overflow: hidden;
-            -webkit-transition: color 1s ease-out;
-            -moz-transition: color 1s ease-out;
-            -ms-transition: color 1s ease-out;
-            -o-transition: color 1s ease-out;
-            transition: color 1s ease-out;
+
+            .package-name,
+            .package-description {
+                @include vendor-prefix-transition(color, 0.3s, ease-out);
+            }
+
+            &::before {
+                content: "\f4f7";
+                font-family: "Font Awesome 5 Brands";
+                font-size: 10em;
+                position: absolute;
+                right: 5%;
+                top: 40%;
+                opacity: 0.05;
+                @include vendor-prefix-transition(opacity 1s ease-out);
+            }
+
             &:hover {
                 border: solid 1px $accent-color;
                 cursor: pointer;
@@ -27,18 +39,9 @@
                     opacity: 0.5;
                 }
             }
+
             &:active {
                 background-color: rgba(46, 186, 174, 0.05);
-            }
-            &::before {
-                content: "\f4f7";
-                font-family: "Font Awesome 5 Brands";
-                font-size: 10em;
-                position: absolute;
-                right: 5%;
-                top: 40%;
-                opacity: 0.05;
-                transition: opacity 1s ease-out;
             }
         }
     }
