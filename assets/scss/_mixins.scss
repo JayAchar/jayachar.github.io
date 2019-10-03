@@ -50,6 +50,15 @@
  }
 
 // Vendor prefixes
+// Generic
+@mixin vendor-prefix ($property, $value) {
+    -webkit-#{$property}: $value;
+    -moz-#{$property}: $value;
+    -ms-#{$property}: $value;
+    -o-#{$property}: $value;
+    #{$property}: $value;
+}
+// Transition
 @mixin vendor-prefix-transition ($property, $time: null, $timing: null) {
     -webkit-transition: $property $time $timing;
     -moz-transition: $property $time $timing;

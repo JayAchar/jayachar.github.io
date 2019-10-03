@@ -8,11 +8,7 @@ a {
     overflow: hidden;
     &:hover {
       img {
-        -webkit-transform: scale(1.05);
-        -moz-transform: scale(1.05);
-        -ms-transform: scale(1.05);
-        -o-transform: scale(1.05);
-        transform: scale(1.05);
+          @include vendor-prefix(transform, scale(1.05));
         filter: brightness(100%);
       }
     }
