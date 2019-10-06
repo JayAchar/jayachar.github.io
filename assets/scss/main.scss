@@ -1224,7 +1224,7 @@ twitter-widget {
  }
 
  #mini-bio {
-
+    margin-bottom: 0;
    p {
      opacity: 0.65;
      font-size: 0.9em;
@@ -1241,7 +1241,12 @@ twitter-widget {
          max-width: 100%;
      }
    }
-
+   footer {
+       @include for-desktop-up {
+           // margin: 0 auto;
+         text-align: center;
+       }
+   }
  }
 
  /* Footer */
