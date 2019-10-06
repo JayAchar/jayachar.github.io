@@ -52,17 +52,19 @@
        }
      }
    }
-   > div, > p {
+    > .content {
+      text-align: justify;
+      padding: 0 1em;
      @include for-desktop-up {
-      margin: 16px 1em;
+      margin: 1em 1em;
     }
      @include for-big-desktop-up {
-       margin: 16px 4em;
+       margin: 1em 4em;
      }
    }
-   > div > p, > p {
-     text-align: justify;
-   }
+   // > div > p, > p {
+   //   text-align: justify;
+   // }
 
    > footer {
      display: flex;
