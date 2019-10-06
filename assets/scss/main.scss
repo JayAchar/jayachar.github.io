@@ -168,6 +168,7 @@ textarea {
    letter-spacing: 0.25em;
    line-height: 1.65;
    text-transform: uppercase;
+   word-wrap: break-word;
    a {
      border-bottom: 0;
    }
@@ -215,6 +216,12 @@ textarea {
      overflow-x: auto;
    }
  }
+
+twitter-widget {
+  margin: 1em auto;
+  font-size: smaller!important;
+}
+
 
  ul.posts {
      width: 80%;

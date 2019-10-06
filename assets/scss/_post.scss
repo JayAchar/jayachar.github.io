@@ -52,7 +52,8 @@
        }
      }
    }
-    > .content {
+    > .content,
+    > p {
       text-align: justify;
       padding: 0 1em;
      @include for-desktop-up {
@@ -62,6 +63,10 @@
        margin: 1em 4em;
      }
    }
+   > .content > p {
+     max-width: 100%;
+   }
+
    // > div > p, > p {
    //   text-align: justify;
    // }
