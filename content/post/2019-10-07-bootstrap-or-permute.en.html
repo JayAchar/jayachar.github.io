@@ -1,0 +1,62 @@
+---
+title: Bootstrap or Permute?
+author: Jay Achar
+date: '2019-10-07'
+slug: bootstrap-or-permute
+categories:
+  - rstats
+tags:
+  - R
+  - research
+description: 'What are they and when you might use them'
+images:
+  - ''
+linktitle: ''
+type: post
+draft: true
+---
+
+
+
+<div id="what-are-they" class="section level1">
+<h1>What are they?</h1>
+<p>Both bootstrapping and permuting are statistical resampling methods. The bootstrap method involves replacement where each component of the original data sample is chosen with equal probability and then allowed to be rechosen. Imagine some lottery balls in a bag - you take one ball at a time, record the figure , then return the ball to the bag allowing reselection. In contrast, the permute methods</p>
+<p>The <strong>bootstrap method</strong> allows estimation of the sampling distribution of a population summary statistic. Resampling an original sample of the population with replacement allows robust standard errors and confidence intervals to be calculated.</p>
+<p>The <strong>permutation method</strong></p>
+</div>
+<div id="when-might-they-be-used" class="section level1">
+<h1>When might they be used?</h1>
+</div>
+<div id="permute-example" class="section level1">
+<h1>Permute example</h1>
+<pre class="r"><code>set.seed(100)
+df &lt;- data.frame(treatment = c(rep(&quot;A&quot;, 5000), rep(&quot;B&quot;, 5000)),
+                 response = c(log(abs(rnorm(5000))), exp(rnorm(5000, mean = 10, sd = 0.5))),
+                 stringsAsFactors = FALSE)
+
+library(ggplot2)
+library(dplyr)
+df %&gt;% 
+  # filter(treatment == &quot;B&quot;) %&gt;% 
+ggplot(aes(x = response)) +
+  geom_histogram() +
+  facet_wrap(~ treatment, scales = &quot;free&quot;)</code></pre>
+<p><img src="/post/2019-10-07-bootstrap-or-permute.en_files/figure-html/permute-1.png" width="672" /></p>
+<pre class="r"><code>resample_mean &lt;- function(n = 1) {
+  v &lt;- sample(df$response[df$treatment == &quot;A&quot;], 5000, replace = TRUE)
+  mean(v)
+} 
+
+means &lt;- purrr::map_dbl(1:50, resample_mean)
+
+hist(means)</code></pre>
+<p><img src="/post/2019-10-07-bootstrap-or-permute.en_files/figure-html/permute-2.png" width="672" /></p>
+<pre class="r"><code>mean(df$response[df$treatment == &quot;A&quot;])</code></pre>
+<pre><code>## [1] -0.6198108</code></pre>
+</div>
+<div id="bootstrap-example" class="section level1">
+<h1>Bootstrap example</h1>
+</div>
+<div id="other-resources" class="section level1">
+<h1>Other resources</h1>
+</div>

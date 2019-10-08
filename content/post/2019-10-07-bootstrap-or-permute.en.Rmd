@@ -1,0 +1,60 @@
+---
+title: Bootstrap or Permute?
+author: Jay Achar
+date: '2019-10-07'
+slug: bootstrap-or-permute
+categories:
+  - rstats
+tags:
+  - R
+  - research
+description: 'What are they and when you might use them'
+images:
+  - ''
+linktitle: ''
+type: post
+draft: true
+---
+# What are they? 
+
+Both bootstrapping and permuting are statistical resampling methods. The bootstrap method involves replacement where each component of the original data sample is chosen with equal probability and then allowed to be rechosen. Imagine some lottery balls in a bag - you take one ball at a time, record the figure , then return the ball to the bag allowing reselection. In contrast, the permute methods 
+
+The **bootstrap method** allows estimation of the sampling distribution of a population summary statistic. Resampling an original sample of the population with replacement allows robust standard errors and confidence intervals to be calculated.
+
+The **permutation method**
+
+# When might they be used? 
+
+
+# Permute example
+```{r permute, message=FALSE}
+set.seed(100)
+df <- data.frame(treatment = c(rep("A", 5000), rep("B", 5000)),
+                 response = c(log(abs(rnorm(5000))), exp(rnorm(5000, mean = 10, sd = 0.5))),
+                 stringsAsFactors = FALSE)
+
+library(ggplot2)
+library(dplyr)
+df %>% 
+  # filter(treatment == "B") %>% 
+ggplot(aes(x = response)) +
+  geom_histogram() +
+  facet_wrap(~ treatment, scales = "free")
+
+resample_mean <- function(n = 1) {
+  v <- sample(df$response[df$treatment == "A"], 5000, replace = TRUE)
+  mean(v)
+} 
+
+means <- purrr::map_dbl(1:50, resample_mean)
+
+hist(means)
+
+mean(df$response[df$treatment == "A"])
+```
+
+
+# Bootstrap example
+
+
+# Other resources
