@@ -1,0 +1,138 @@
+---
+title: Powerlifting - Tidy Tuesday
+author: Jay Achar
+date: '2019-10-19'
+slug: tt-19-41-powerlifting
+categories:
+  - dataviz
+tags:
+  - tidytuesday
+  - R
+description: 'Practicing with tidybayes'
+featured: "bled.jpg"
+featuredalt: "Lake Bled landscape"
+---
+
+
+
+<p>This week’s <a href="https://thomasmock.netlify.com/post/tidytuesday-a-weekly-social-data-project-in-r/" target="_blank">#TidyTuesday</a> topic is international powerlifting. While it’s certainly not a topic I know much about or am particularly interested in, the description of the data suggests there’s plenty to dig into.</p>
+<p>This is a short blog post describing my exploratory analysis with the intention of generating an attractive but also an informative final plot for my <a href="https://www.twitter.com/dr_jay_a" target="_blank">Twitter feed</a>. I’ve recently found the <code>tidybayes</code> package and wanted to try out some of the ggplot-compatible functions that it contains.</p>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>Let’s start by importing the data from the <a href="https://github.com/rfordatascience/tidytuesday" target="_blank">Tidy Tuesday Github repo</a> and taking a quick look at it’s structure.</p>
+<pre class="r"><code>ipf_lifts &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-10-08/ipf_lifts.csv&quot;)</code></pre>
+<pre class="r"><code>glimpse(ipf_lifts)</code></pre>
+<pre><code>## Observations: 41,152
+## Variables: 16
+## $ name             &lt;chr&gt; &quot;Hiroyuki Isagawa&quot;, &quot;David Mannering&quot;, &quot;Eddy Pe…
+## $ sex              &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M…
+## $ event            &lt;chr&gt; &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;…
+## $ equipment        &lt;chr&gt; &quot;Single-ply&quot;, &quot;Single-ply&quot;, &quot;Single-ply&quot;, &quot;Sing…
+## $ age              &lt;dbl&gt; NA, 24.0, 35.5, 19.5, NA, NA, 32.5, 31.5, NA, N…
+## $ age_class        &lt;chr&gt; NA, &quot;24-34&quot;, &quot;35-39&quot;, &quot;20-23&quot;, NA, NA, &quot;24-34&quot;,…
+## $ division         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ bodyweight_kg    &lt;dbl&gt; 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 90.0,…
+## $ weight_class_kg  &lt;chr&gt; &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;,…
+## $ best3squat_kg    &lt;dbl&gt; 205.0, 225.0, 245.0, 195.0, 240.0, 200.0, 220.0…
+## $ best3bench_kg    &lt;dbl&gt; 140.0, 132.5, 157.5, 110.0, 140.0, 100.0, 140.0…
+## $ best3deadlift_kg &lt;dbl&gt; 225.0, 235.0, 270.0, 240.0, 215.0, 230.0, 235.0…
+## $ place            &lt;chr&gt; &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;1&quot;, &quot;2&quot;, &quot;2…
+## $ date             &lt;date&gt; 1985-08-03, 1985-08-03, 1985-08-03, 1985-08-03…
+## $ federation       &lt;chr&gt; &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;…
+## $ meet_name        &lt;chr&gt; &quot;World Games&quot;, &quot;World Games&quot;, &quot;World Games&quot;, &quot;W…</code></pre>
+<p>So, it looks like each lifter’s efforts in different events are represented by a single row resulting in 41152 rows…impressive.</p>
+<p>What about some summary statistics to get another view of this huge data set:</p>
+<pre class="r"><code>ipf_lifts %&gt;% skim()</code></pre>
+<pre><code>## Skim summary statistics
+##  n obs: 41152 
+##  n variables: 16 
+## 
+## ── Variable type:character ──────────────────────────────────────────────────────
+##         variable missing complete     n min max empty n_unique
+##        age_class    2884    38268 41152   4   6     0       16
+##         division     627    40525 41152   4  11     0       12
+##        equipment       0    41152 41152   3  10     0        3
+##            event       0    41152 41152   1   3     0        3
+##       federation       0    41152 41152   3   3     0        1
+##        meet_name       0    41152 41152  11  54     0       30
+##             name       0    41152 41152   2  36     0    17803
+##            place       0    41152 41152   1   2     0       34
+##              sex       0    41152 41152   1   1     0        2
+##  weight_class_kg       1    41151 41152   2   5     0       38
+## 
+## ── Variable type:Date ───────────────────────────────────────────────────────────
+##  variable missing complete     n        min        max     median n_unique
+##      date       0    41152 41152 1973-11-09 2019-08-26 2007-10-14      224
+## 
+## ── Variable type:numeric ────────────────────────────────────────────────────────
+##          variable missing complete     n   mean    sd      p0   p25    p50
+##               age    2906    38246 41152  34.77 14.62    0.5   22.5  31.5 
+##     best3bench_kg    2462    38690 41152 144.68 60.03 -160     97.5 140   
+##  best3deadlift_kg   14028    27124 41152 221.84 63.72 -215    170   222.5 
+##     best3squat_kg   13698    27454 41152 217.55 74.61 -210    160   215   
+##     bodyweight_kg     187    40965 41152  81.15 24.93   37.29  60    75.55
+##    p75  p100     hist
+##   45    93.5 ▁▇▆▅▃▂▁▁
+##  185   415   ▁▁▁▇▇▃▁▁
+##  270   420   ▁▁▁▁▆▇▆▁
+##  270   490   ▁▁▁▃▇▇▂▁
+##   97.3 240   ▆▇▅▂▁▁▁▁</code></pre>
+</div>
+<div id="missing-data" class="section level2">
+<h2>Missing data</h2>
+<p>Is there much missing data in the most important variables? Let’s choose some key variables and plot a simple summary of missingness.</p>
+<pre><code>## # A tibble: 7 x 3
+##   variable         n_miss pct_miss
+##   &lt;chr&gt;             &lt;int&gt;    &lt;dbl&gt;
+## 1 best3deadlift_kg  14028   34.1  
+## 2 best3squat_kg     13698   33.3  
+## 3 age                2906    7.06 
+## 4 best3bench_kg      2462    5.98 
+## 5 bodyweight_kg       187    0.454
+## 6 sex                   0    0    
+## 7 date                  0    0</code></pre>
+</div>
+<div id="distribution" class="section level1">
+<h1>Distribution</h1>
+<p>I"m interested to look more carefully at the maximum weights lifted within the data set, so I’ll start by plotting their distributions:</p>
+<p><img src="/post/2019-10-19-powerlifting-tidy-tuesday.en_files/figure-html/best-distribution-1.png" width="576" /></p>
+<p>With this number of data points, it’s not surprising that the distribution is reasonably close to gaussian.</p>
+<p>I wonder who has the most records in the dataset:</p>
+<pre class="r"><code>ipf_lifts %&gt;% 
+  count(name) %&gt;% 
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 17,803 x 2
+##    name                      n
+##    &lt;chr&gt;                 &lt;int&gt;
+##  1 Hiroyuki Isagawa         54
+##  2 Dariusz Wszoła           52
+##  3 Ielja Strik              50
+##  4 Jan Wegiera              47
+##  5 Tsung-Ting Hsieh         42
+##  6 Hana Takáčová            40
+##  7 Hideaki Inaba            39
+##  8 Brenda van der Meulen    36
+##  9 Chen-Yeh Chao            35
+## 10 Vuokko Viitasaari        34
+## # … with 17,793 more rows</code></pre>
+<p>That’s a lot of events!</p>
+<p>Sex, age, age_class, bodyweight_kg and date seem self-explanatory. Looking at the codebook on the <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-10-08" target="_blank">Tidy Tuesday data page</a> fills in the rest of the gaps.</p>
+<div id="temporal-trends" class="section level2">
+<h2>Temporal trends</h2>
+<p>Let’s take a look at how many rows there are per unit time:
+<img src="/post/2019-10-19-powerlifting-tidy-tuesday.en_files/figure-html/rows-by-year-1.png" width="672" /></p>
+<p>That either suggests there are more events or that there are more participants at each event in recent years. The distribution does seem to be affected by some higher outliers in the last decade rather than there being a consistent upward trend.</p>
+<p>Are there other temporal relationships to consider?</p>
+<p><img src="/post/2019-10-19-powerlifting-tidy-tuesday.en_files/figure-html/gender-by-year-1.png" width="672" /></p>
+<p>The temporal trend in the quantity of data seems reasonably consistent across gender where data quantity is consistently lower for women than men.</p>
+<p>How about bodyweight? Are lifters getting heavier or lighter over time? I’ll plot the distributions of male powerlifters to check whether we can see any temporal change in medians or distributions. I’m using the <a href="https://mjskay.github.io/tidybayes/index.html" target="_blank">tidybayes package</a> for this which includes a number of geoms_* and stats_* within the Github development version.</p>
+<p><img src="/post/2019-10-19-powerlifting-tidy-tuesday.en_files/figure-html/bodyweight-decade-1.png" width="672" /></p>
+<p>Is there any trend in the maximum deadlift weights by time and gender?</p>
+<p><img src="/post/2019-10-19-powerlifting-tidy-tuesday.en_files/figure-html/deadlift-gender-time-1.png" width="672" /></p>
+<p>As we would expect, male lifters are able to lift higher maximal weights than women. There isn’t any trend in maximum weights lifted over the time-span of this data set in men or women. The distributions by decade clearly show the increasing data available in more recent decads.</p>
+</div>
+<div id="conclusions" class="section level2">
+<h2>Conclusions</h2>
+<p>The <code>tidybayes</code> package has a number of ggplot-compatible functions which are perfect for visualising uncertainty and distributions. The development version available on Github remains the version to use for this purpose since most of the most interesting functions remain in development.</p>
+</div>
+</div>
