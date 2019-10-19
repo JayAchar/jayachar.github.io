@@ -60,12 +60,13 @@
     > .content {
       p,
       h1 {
-        margin: 0 1em;
+        margin: 1em 1em;
       }
-      text-align: justify;
-     @include for-desktop-up {
+      text-align: left;
       margin: 1em 1em;
-    }
+    //  @include for-desktop-up {
+    //   margin: 1em 1em;
+    // }
      @include for-big-desktop-up {
        margin: 1em 4em;
      }

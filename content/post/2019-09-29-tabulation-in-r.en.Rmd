@@ -70,7 +70,7 @@ htmltools::HTML("</div>")
 ```
 
 
-## Control {tableby.control}
+## tableby.control
 
 Being able to control the statistical output of the `tableby` object was one of the main reasons I chose `arsenal` over other R packages. The number of arguments is impressive, although somewhat daunting at the same time. I'll try and run through some of the options that I use regularly.
 
