@@ -5,6 +5,7 @@ date: '2019-08-25'
 slug: tt-19-17-anime
 featured: "norway_pano.jpg"
 featuredalt: "Norway panorama"
+description: 'Visualizing data to extract hidden insights'
 categories:
   - dataviz
 tags:
