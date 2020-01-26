@@ -829,12 +829,6 @@ twitter-widget {
 
  #site-header {
    background-color: #ffffff;
-   border-bottom: solid 1px rgba($border-color, 0.3);
-   -webkit-box-shadow:  0 3px 6px rgba(0,0,0,0.19), 0 3px 6px rgba(0,0,0,0.23);
-   -moz-box-shadow:  0 3px 6px rgba(0,0,0,0.19), 0 3px 6px rgba(0,0,0,0.23);
-   -ms-box-shadow:  0 3px 6px rgba(0,0,0,0.19), 0 3px 6px rgba(0,0,0,0.23);
-   -o-box-shadow:  0 3px 6px rgba(0,0,0,0.19), 0 3px 6px rgba(0,0,0,0.23);
-   box-shadow: 0 3px 6px rgba(0,0,0,0.19), 0 3px 6px rgba(0,0,0,0.23);
    height: 3.5em;
    line-height: 3.5em;
    position: fixed;
@@ -844,7 +838,6 @@ twitter-widget {
    z-index: 10000;
    a {
      border: 0;
-     border-left: 1px solid rgba($border-color, 0.3);
      font-family: $general_font;
      font-size: 0.7em;
      font-weight: 400;
@@ -966,7 +959,6 @@ twitter-widget {
      @include for-desktop-up {
        flex-grow: 0;
        &:after {
-         background: rgba($border-color, 0.3);
          content: '';
          display: block;
          height: 56px;
