@@ -12,7 +12,12 @@ description: 'Reproducible analyses using R with Docker'
 images:
   - ''
 linktitle: ''
+draft: true
 ---
+```{r include = FALSE}
+knitr::opts_chunk$set(eval = FALSE, comment = "")
+```
+
 In the last few weeks, I've been working with an analysis that I first started 3 years ago. The study 
 was accepted for an international conference late last year and some of the questions that came 
 up from the audience rekindled my ambition of improving on the original analysis. 
@@ -33,28 +38,180 @@ would like some sample code that I'll refer to through this post.
 
 # Reproducibility in research
 
-The question of *'Why do we need reproducibility in research?'* should be fairly obvious, but for 
-many, I don't the answers are taken particularly seriously. That may be because they have never 
-needed to return to an analysis to update or re-run, or because they lack the knowledge to fully 
-implement it. 
+The question of *'Why do we need reproducibility in research?'* should be fairly obvious. 
+In my case, lack of knowledge was initially the barrier to addressing this, but soon enough I realised 
+that the process was much easier than I had thought. 
 
+My motivation for learning about some aspects of reproducibility in research and then moving on to 
+work with some of tools available, came from returning to analyses that I had run in the past. 
 As time goes on, I'm relooking at more and more analyses and, thankfully, recognising that my 
 ability in R is much better than it was. Where documentation and dependency management is well 
-organised, I can quickly re-run, adjust or refactor an analysis to answer questions from colleagues
-or reviewers. 
+organised, I'm able to quickly re-run, adjust or refactor an analysis to answer questions from colleagues
+or reviewers.  
 
+Some of other aspects of reproducibility in statistical analyses that I won't cover here include:  
+
+  1. Version control,
+  2. Transparency in code development, 
+  3. Relative paths in code,
+  4. Unit testing,
+  5. Continuous integration
 
 # Dependencies
 
+One of the biggest challenges with revisiting code that worked in the past is the inevitable updating 
+of dependencies. **Dependencies are additional resources that your code requires to run correctly**. When 
+discussing R analyses, the most obvious examples are the packages of functions we regularly incorporate
+into our interactive workflow. Think [dplyr](https://dplyr.tidyverse.org/), 
+[ggplot2](https://ggplot2.tidyverse.org/), [car](https://cran.r-project.org/web/packages/car/index.html) 
+and maybe [rmarkdown](https://cran.r-project.org/web/packages/rmarkdown/index.html).  
 
+When dependencies are updated, functions may change their behaviour, require different arguments as inputs,
+or stop existing altogether.  
 
-# Generating reproducible results
+In software development, professional programmers manage this issue by working within a ***development 
+environment*** that defines exact versions of all dependencies. 
 
-
+One of the most popular tools, [docker](https://www.docker.com), is freely available for all, is able 
+to run on all operating systems, has numerous online resources to learn and debug problems and a 
+[repository](https://hub.docker.com) of *images* which save users time and effort.
 
 # Building a docker image
 
+Docker works using concepts of ***images*** and ***containers***. I won't go into details about docker
+here, but there are lots of resources, including the 
+[official documentation](https://docs.docker.com/engine/docker-overview/), to help understand 
+the way docker works. If you're interested in developing your own custom images, then I would 
+recommend reading the documentation, blog posts and also YouTube videos relating to your exact use
+csae. 
 
-# Retaining control of raw data
+Very briefly, a docker **image**:
 
+  * is **built** once from a template file, 
+  * incorporates all files relevant for the purpose of the image
+  * can be rebuilt when changes are required
+    
+While, a docker **container**:
 
+  * runs an instance of image
+  * performs the tasks set out in the image build
+  * can be stopped and restarted to duplicate tasks
+    
+So, when we build an **image**, we can define versions of the code and its dependencies so that
+the results of running the **container** are predicatable and reproducable. 
+
+## Dockerfile  
+
+Within the folder containing your R project, create a file called *Dockerfile* - the spelling's
+important and there should be no file extension. 
+
+This is the template which will be **built** into our analysis image. The file is based on exact
+syntax so be precise. Either in your command line editor, or other code editor open start editing 
+the Dockerfile. 
+
+```{r}
+# versioned R distribution with tidyverse and Rstudio installed
+FROM rocker/tidyverse:3.5.1
+```
+
+Our analysis-specific image will add our specific needs to the
+[rocker/tidyverse](https://www.rocker-project.org/images/) image. Including the version tag
+ensures that the image will be built with the version of R and that all installed packages 
+will be versioned to work with this R-version. 
+
+Create an additional R-script within your project folder which will install all of the packages 
+requried by your analysis. The base image above includes all packages included in the `tidyverse`, 
+so no need to re-install them at this stage. This R-script should be similar to any other R code:
+
+```{r}
+# install packages into analysis Docker image
+install.packages("car")
+```
+
+Then add the following lines to your Dockerfile to ensure this file is added to the docker image
+along with all files from your analysis `R` folder. 
+
+```{r}
+# define additional packages to install
+ADD ./packages.R /tmp/packages.R
+# add analysis scripts
+ADD ./R /home/rstudio_user/R
+```
+
+In the next few lines of the Dockerfile, we'll create an analysis output folder and a data 
+folder before installing all of the packages we defined in the `packages.R` file. 
+
+```{r}
+# add output folder
+RUN mkdir /home/rstudio_user/output
+# add raw data folder
+RUN mkdir /home/rstudio_user/raw
+# install packages
+RUN Rscript /tmp/packages.R
+```
+
+## Build image
+
+The next step is to build the analysis image using the command below. This one needs to be entered
+into your command line terminal - `terminal` on Mac OS X or `Command Prompt` on Windows. 
+
+```{r}
+# navigate to your analysis folder where your Dockerfile is saved
+cd <<analysis-folder>>
+# build the image using the docker engine
+docker build -t my-analysis-image .
+```
+
+Don't miss the full stop at the end of the build command - the command won't work without it. 
+
+All being well, the docker engine will take some time to download and unpack the necessary
+files then end with message confirming a successful build. 
+
+To check that you image has been built successfully, you can use the command `docker images` 
+to output a list of all of your computer's docker images. Confirm that your named image 
+`my-analysis-image` is present.
+
+## Start container  
+
+Now we have our image, it's time to start a container:
+
+```{r}
+# start container
+docker run -d --name my_container \
+        -v <<add_your_data_folder_path_here>>:/home/rstudio_user/raw \
+        -v <<add_your_analysis_output_folder_here>>:/home/rstudio_user/output \
+        -p 8787:8787 \
+        -e PASSWORD=test1234 \
+        -e USER=rstudio_user \
+        my-analysis-image
+```
+
+This command will start a docker container using the image you have defined in your Dockerfile. 
+The container includes a RStudio server with the username - `rstudio_user` - and password - `test1234` -  
+defined in the run command. 
+
+In your internet browser, navigate to [`http://localhost::8787`](http://localhost::8787) where 
+a Rstudio login page should allow you to enter the necessary credentials. The RStudio session 
+should include a `R` folder containing your analysis scripts. 
+
+Your raw data should be available in the `raw` folder and can be adjusted as required. Raw data stays on
+your computer here, as does any outputs from the analysis. 
+
+When you've completed your analysis, log out of the RStudio session and head back to your command line
+to shutdown the docker container 
+
+```{r}
+# stop the analysis container
+docker stop my_container
+```
+
+# Conclusion
+
+This approach of packaging your R code into a docker image should ensure that your analysis is
+both reproducible and transferable to other computers. The image I've described is quite simple
+and could be improved upon both in terms of functionality as well as size. However, the purpose 
+of this post was to describe a relatively simple workflow to encourage you to incorporate this final
+step into your analysis process. 
+
+Let me know if you have suggestions for improving the docker image and do try out the example code in
+the [Github repo](https://www.github.com/JayAchar/blog-reproduce). 

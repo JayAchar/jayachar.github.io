@@ -12,9 +12,11 @@ description: 'Reproducible analyses using R with Docker'
 images:
   - ''
 linktitle: ''
+draft: true
 ---
 
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<script src="/rmarkdown-libs/elevate-section-attrs/elevate-section-attrs.js"></script>
 
 
 <p>In the last few weeks, I’ve been working with an analysis that I first started 3 years ago. The study
@@ -32,24 +34,142 @@ this three year old analysis to run again.</p>
 would like some sample code that I’ll refer to through this post.</p>
 <div id="reproducibility-in-research" class="section level1">
 <h1>Reproducibility in research</h1>
-<p>The question of <em>‘Why do we need reproducibility in research?’</em> should be fairly obvious, but for
-many, I don’t the answers are taken particularly seriously. That may be because they have never
-needed to return to an analysis to update or re-run, or because they lack the knowledge to fully
-implement it.</p>
-<p>As time goes on, I’m relooking at more and more analyses and, thankfully, recognising that my
+<p>The question of <em>‘Why do we need reproducibility in research?’</em> should be fairly obvious.
+In my case, lack of knowledge was initially the barrier to addressing this, but soon enough I realised
+that the process was much easier than I had thought.</p>
+<p>My motivation for learning about some aspects of reproducibility in research and then moving on to
+work with some of tools available, came from returning to analyses that I had run in the past.
+As time goes on, I’m relooking at more and more analyses and, thankfully, recognising that my
 ability in R is much better than it was. Where documentation and dependency management is well
-organised, I can quickly re-run, adjust or refactor an analysis to answer questions from colleagues
+organised, I’m able to quickly re-run, adjust or refactor an analysis to answer questions from colleagues
 or reviewers.</p>
+<p>Some of other aspects of reproducibility in statistical analyses that I won’t cover here include:</p>
+<ol style="list-style-type: decimal">
+<li>Version control,</li>
+<li>Transparency in code development,</li>
+<li>Relative paths in code,</li>
+<li>Unit testing,</li>
+<li>Continuous integration</li>
+</ol>
 </div>
 <div id="dependencies" class="section level1">
 <h1>Dependencies</h1>
-</div>
-<div id="generating-reproducible-results" class="section level1">
-<h1>Generating reproducible results</h1>
+<p>One of the biggest challenges with revisiting code that worked in the past is the inevitable updating
+of dependencies. <strong>Dependencies are additional resources that your code requires to run correctly</strong>. When
+discussing R analyses, the most obvious examples are the packages of functions we regularly incorporate
+into our interactive workflow. Think <a href="https://dplyr.tidyverse.org/">dplyr</a>,
+<a href="https://ggplot2.tidyverse.org/">ggplot2</a>, <a href="https://cran.r-project.org/web/packages/car/index.html">car</a>
+and maybe <a href="https://cran.r-project.org/web/packages/rmarkdown/index.html">rmarkdown</a>.</p>
+<p>When dependencies are updated, functions may change their behaviour, require different arguments as inputs,
+or stop existing altogether.</p>
+<p>In software development, professional programmers manage this issue by working within a <strong><em>development
+environment</em></strong> that defines exact versions of all dependencies.</p>
+<p>One of the most popular tools, <a href="https://www.docker.com">docker</a>, is freely available for all, is able
+to run on all operating systems, has numerous online resources to learn and debug problems and a
+<a href="https://hub.docker.com">repository</a> of <em>images</em> which save users time and effort.</p>
 </div>
 <div id="building-a-docker-image" class="section level1">
 <h1>Building a docker image</h1>
+<p>Docker works using concepts of <strong><em>images</em></strong> and <strong><em>containers</em></strong>. I won’t go into details about docker
+here, but there are lots of resources, including the
+<a href="https://docs.docker.com/engine/docker-overview/">official documentation</a>, to help understand
+the way docker works. If you’re interested in developing your own custom images, then I would
+recommend reading the documentation, blog posts and also YouTube videos relating to your exact use
+csae.</p>
+<p>Very briefly, a docker <strong>image</strong>:</p>
+<ul>
+<li>is <strong>built</strong> once from a template file,</li>
+<li>incorporates all files relevant for the purpose of the image</li>
+<li>can be rebuilt when changes are required</li>
+</ul>
+<p>While, a docker <strong>container</strong>:</p>
+<ul>
+<li>runs an instance of image</li>
+<li>performs the tasks set out in the image build</li>
+<li>can be stopped and restarted to duplicate tasks</li>
+</ul>
+<p>So, when we build an <strong>image</strong>, we can define versions of the code and its dependencies so that
+the results of running the <strong>container</strong> are predicatable and reproducable.</p>
+<div id="dockerfile" class="section level2">
+<h2>Dockerfile</h2>
+<p>Within the folder containing your R project, create a file called <em>Dockerfile</em> - the spelling’s
+important and there should be no file extension.</p>
+<p>This is the template which will be <strong>built</strong> into our analysis image. The file is based on exact
+syntax so be precise. Either in your command line editor, or other code editor open start editing
+the Dockerfile.</p>
+<pre class="r"><code># versioned R distribution with tidyverse and Rstudio installed
+FROM rocker/tidyverse:3.5.1</code></pre>
+<p>Our analysis-specific image will add our specific needs to the
+<a href="https://www.rocker-project.org/images/">rocker/tidyverse</a> image. Including the version tag
+ensures that the image will be built with the version of R and that all installed packages
+will be versioned to work with this R-version.</p>
+<p>Create an additional R-script within your project folder which will install all of the packages
+requried by your analysis. The base image above includes all packages included in the <code>tidyverse</code>,
+so no need to re-install them at this stage. This R-script should be similar to any other R code:</p>
+<pre class="r"><code># install packages into analysis Docker image
+install.packages(&quot;car&quot;)</code></pre>
+<p>Then add the following lines to your Dockerfile to ensure this file is added to the docker image
+along with all files from your analysis <code>R</code> folder.</p>
+<pre class="r"><code># define additional packages to install
+ADD ./packages.R /tmp/packages.R
+# add analysis scripts
+ADD ./R /home/rstudio_user/R</code></pre>
+<p>In the next few lines of the Dockerfile, we’ll create an analysis output folder and a data
+folder before installing all of the packages we defined in the <code>packages.R</code> file.</p>
+<pre class="r"><code># add output folder
+RUN mkdir /home/rstudio_user/output
+# add raw data folder
+RUN mkdir /home/rstudio_user/raw
+# install packages
+RUN Rscript /tmp/packages.R</code></pre>
 </div>
-<div id="retaining-control-of-raw-data" class="section level1">
-<h1>Retaining control of raw data</h1>
+<div id="build-image" class="section level2">
+<h2>Build image</h2>
+<p>The next step is to build the analysis image using the command below. This one needs to be entered
+into your command line terminal - <code>terminal</code> on Mac OS X or <code>Command Prompt</code> on Windows.</p>
+<pre class="r"><code># navigate to your analysis folder where your Dockerfile is saved
+cd &lt;&lt;analysis-folder&gt;&gt;
+# build the image using the docker engine
+docker build -t my-analysis-image .</code></pre>
+<p>Don’t miss the full stop at the end of the build command - the command won’t work without it.</p>
+<p>All being well, the docker engine will take some time to download and unpack the necessary
+files then end with message confirming a successful build.</p>
+<p>To check that you image has been built successfully, you can use the command <code>docker images</code>
+to output a list of all of your computer’s docker images. Confirm that your named image
+<code>my-analysis-image</code> is present.</p>
+</div>
+<div id="start-container" class="section level2">
+<h2>Start container</h2>
+<p>Now we have our image, it’s time to start a container:</p>
+<pre class="r"><code># start container
+docker run -d --name my_container \
+        -v &lt;&lt;add_your_data_folder_path_here&gt;&gt;:/home/rstudio_user/raw \
+        -v &lt;&lt;add_your_analysis_output_folder_here&gt;&gt;:/home/rstudio_user/output \
+        -p 8787:8787 \
+        -e PASSWORD=test1234 \
+        -e USER=rstudio_user \
+        my-analysis-image</code></pre>
+<p>This command will start a docker container using the image you have defined in your Dockerfile.
+The container includes a RStudio server with the username - <code>rstudio_user</code> - and password - <code>test1234</code> -<br />
+defined in the run command.</p>
+<p>In your internet browser, navigate to <a href="http://localhost::8787"><code>http://localhost::8787</code></a> where
+a Rstudio login page should allow you to enter the necessary credentials. The RStudio session
+should include a <code>R</code> folder containing your analysis scripts.</p>
+<p>Your raw data should be available in the <code>raw</code> folder and can be adjusted as required. Raw data stays on
+your computer here, as does any outputs from the analysis.</p>
+<p>When you’ve completed your analysis, log out of the RStudio session and head back to your command line
+to shutdown the docker container</p>
+<pre class="r"><code># stop the analysis container
+docker stop my_container</code></pre>
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>This approach of packaging your R code into a docker image should ensure that your analysis is
+both reproducible and transferable to other computers. The image I’ve described is quite simple
+and could be improved upon both in terms of functionality as well as size. However, the purpose
+of this post was to describe a relatively simple workflow to encourage you to incorporate this final
+step into your analysis process.</p>
+<p>Let me know if you have suggestions for improving the docker image and do try out the example code in
+the <a href="https://www.github.com/JayAchar/blog-reproduce">Github repo</a>.</p>
 </div>
