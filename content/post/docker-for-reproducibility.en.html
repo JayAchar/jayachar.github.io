@@ -1,0 +1,55 @@
+---
+title: Docker for reproducibility
+author: Jay Achar
+date: '2020-02-11'
+slug: docker-for-reproducibility
+categories:
+  - rstats
+tags:
+  - docker
+  - research
+description: 'Reproducible analyses using R with Docker'
+images:
+  - ''
+linktitle: ''
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>In the last few weeks, I’ve been working with an analysis that I first started 3 years ago. The study
+was accepted for an international conference late last year and some of the questions that came
+up from the audience rekindled my ambition of improving on the original analysis.</p>
+<p>This study represented my first analysis performed solely with R after having learnt to use Stata
+earlier in my research career. For that reason, I have a little nostalgia towards this particular piece,
+but more importantly, it means the analysis isn’t structured in a way that helps revitalisation!</p>
+<p>When looking at the scripts, folders and raw data, it’s clear that while the analysis has structure,
+it’s not intuitive when scanning with new eyes. The poor documentation adds to the sense
+that the work was designed for only one reader: myself in 2017.</p>
+<p>So, this blog post represents some of the key lessons I’ve been schooled on as I’ve tried to get
+this three year old analysis to run again.</p>
+<p>Clone or fork <a href="https://www.github.com/JayAchar/blog-reproduce" target="_blank">this repo</a> if you
+would like some sample code that I’ll refer to through this post.</p>
+<div id="reproducibility-in-research" class="section level1">
+<h1>Reproducibility in research</h1>
+<p>The question of <em>‘Why do we need reproducibility in research?’</em> should be fairly obvious, but for
+many, I don’t the answers are taken particularly seriously. That may be because they have never
+needed to return to an analysis to update or re-run, or because they lack the knowledge to fully
+implement it.</p>
+<p>As time goes on, I’m relooking at more and more analyses and, thankfully, recognising that my
+ability in R is much better than it was. Where documentation and dependency management is well
+organised, I can quickly re-run, adjust or refactor an analysis to answer questions from colleagues
+or reviewers.</p>
+</div>
+<div id="dependencies" class="section level1">
+<h1>Dependencies</h1>
+</div>
+<div id="generating-reproducible-results" class="section level1">
+<h1>Generating reproducible results</h1>
+</div>
+<div id="building-a-docker-image" class="section level1">
+<h1>Building a docker image</h1>
+</div>
+<div id="retaining-control-of-raw-data" class="section level1">
+<h1>Retaining control of raw data</h1>
+</div>
