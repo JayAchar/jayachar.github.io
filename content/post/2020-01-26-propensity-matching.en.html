@@ -1,0 +1,43 @@
+---
+title: Propensity matching
+author: Jay Achar
+date: '2020-01-26'
+slug: propensity-matching
+categories:
+  - rstats
+tags:
+  - R
+  - analysis
+description: 'Analysing observational data'
+images:
+  - ''
+linktitle: ''
+type: post
+draft: true
+---
+
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<script src="/rmarkdown-libs/elevate-section-attrs/elevate-section-attrs.js"></script>
+
+
+<div id="what-is-propensity-matching-for" class="section level2">
+<h2>What is propensity matching for?</h2>
+<p>Propensity matching is a technique used primarily for the analysis of observational study data. In non-randomised studies, treatment is frequently allocated based on certain characteristics of participants. For example, where a drug is considered to cause more side-effects, it may not be given to older participants by clinicians. This is a concept called <strong>confounding</strong> where a third variable is associated with both the outcome and the explanatory variable of a study question. Participant age may be a confounding characteristic in a study investigating the effect of an HIV treatment regimen on viral suppression for example.</p>
+</div>
+<div id="example-data" class="section level2">
+<h2>Example data</h2>
+<pre class="r"><code># Read in data
+mort &lt;- read.csv(file = &quot;https://jay.rbind.io/data/propensity_data.csv&quot;)
+head(mort)</code></pre>
+<pre><code>##   id age risk severity treat death
+## 1  1  48    3        8     0     0
+## 2  2  59    4        6     1     0
+## 3  3  67    3        6     0     1
+## 4  4  51    0        6     0     0
+## 5  5  56    1        6     1     0
+## 6  6  60    1        6     0     0</code></pre>
+</div>
+<div id="additional-resources" class="section level2">
+<h2>Additional resources</h2>
+<p><a href="http://web.hku.hk/~bcowling/examples/propensity.htm" class="uri">http://web.hku.hk/~bcowling/examples/propensity.htm</a></p>
+</div>

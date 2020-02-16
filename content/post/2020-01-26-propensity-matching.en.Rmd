@@ -1,0 +1,39 @@
+---
+title: Propensity matching
+author: Jay Achar
+date: '2020-01-26'
+slug: propensity-matching
+categories:
+  - rstats
+tags:
+  - R
+  - analysis
+description: 'Analysing observational data'
+images:
+  - ''
+linktitle: ''
+type: post
+draft: true
+---
+```{r setup, include = FALSE}
+library(tidyverse)
+
+```
+
+## What is propensity matching for? 
+
+Propensity matching is a technique used primarily for the analysis of observational study data. In non-randomised studies, treatment is frequently allocated based on certain characteristics of participants. For example, where a drug is considered to cause more side-effects, it may not be given to older participants by clinicians. This is a concept called **confounding** where a third variable is associated with both the outcome and the explanatory variable of a study question. Participant age may be a confounding characteristic in a study investigating the effect of an HIV treatment regimen on viral suppression for example. 
+
+## Example data
+
+```{r read-data}
+# Read in data
+mort <- read.csv(file = "https://jay.rbind.io/data/propensity_data.csv")
+head(mort)
+```
+
+
+
+## Additional resources
+
+http://web.hku.hk/~bcowling/examples/propensity.htm
