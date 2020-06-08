@@ -2906,8 +2906,8 @@ div.tocify {
 
 <div id="report-details" class="section level1">
 <h1>Report details</h1>
-<p>Reporting date range: <strong>01 Jan 2020 - 01 May 2020</strong><br />
-Date and time report generated: <strong>29 May 2020, 13:56 CEST</strong><br />
+<p>Reporting date range: <strong>01 Jan 2009 - 31 Dec 2009</strong><br />
+Date and time report generated: <strong>08 June 2020, 12:39 CEST</strong><br />
 Reporting package version: <strong>0.0.2.0</strong></p>
 <p>Comments or questions to: <strong><a href="mailto:his@oca.msf.org?subject=EMR_HIV_report">his@oca.msf.org</a></strong></p>
 <hr>
@@ -2934,7 +2934,7 @@ Reporting package version: <strong>0.0.2.0</strong></p>
 </tbody>
 </table>
 <hr>
-<p>Data for <strong>01 Jan 2020 - 01 May 2020:</strong></p>
+<p>Data for <strong>01 Jan 2009 - 31 Dec 2009:</strong></p>
 <table>
 <thead>
 <tr class="header">
@@ -2971,6 +2971,7 @@ Reporting package version: <strong>0.0.2.0</strong></p>
 <!-- Generate table -->
 <!-- Generate monthly initiations plot -->
 <p><br> <strong>No data available for the reporting period</strong></p>
+<!-- Generate monthly initiation plot if data available -->
 <!-- Generate quarterly initiations plot -->
 <!-- Add definitions -->
 <hr>
@@ -3071,7 +3072,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
