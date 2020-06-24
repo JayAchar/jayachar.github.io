@@ -2673,20 +2673,6 @@ align-items: center;
 justify-content: flex-start;
 font-variant: small-caps;
 }
-footer {
-display: flex;
-display: -webkit-flex;
-flex-direction: row;
-justify-content: center;
-align-items: flex-end;
-background-color: white;
-height: 3em;
-}
-footer p {
-font-family: Calibri, helvetica, sans-serif;
-font-variant: small-caps;
-font-size: 0.7em;
-}
 .top_stripe {
 display: flex;
 display: -webkit-flex;
@@ -2716,6 +2702,11 @@ border-width: medium;
 
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
 background-color: red;
+}
+
+.inclusion-table {
+display: flex;
+justify-content: space-evenly;
 }
 </style>
 
@@ -2907,8 +2898,8 @@ div.tocify {
 <div id="report-details" class="section level1">
 <h1>Report details</h1>
 <p>Reporting date range: <strong>01 Jan 2009 - 31 Dec 2009</strong><br />
-Date and time report generated: <strong>15 June 2020, 19:06 CEST</strong><br />
-Reporting package version: <strong>0.0.2.9001</strong></p>
+Date and time report generated: <strong>24 June 2020, 10:01 CEST</strong><br />
+Reporting package version: <strong>0.0.2.9002</strong></p>
 <p>Comments or questions to: <strong><a href="mailto:his@oca.msf.org?subject=EMR_PMTCT_report">his@oca.msf.org</a></strong></p>
 <hr>
 <table>
@@ -2921,7 +2912,7 @@ Reporting package version: <strong>0.0.2.9001</strong></p>
 <tbody>
 <tr class="odd">
 <td>First programme admission</td>
-<td align="right">NA</td>
+<td align="right">No admissions recorded</td>
 </tr>
 <tr class="even">
 <td>Total programme admissions</td>
@@ -2970,6 +2961,9 @@ Reporting package version: <strong>0.0.2.9001</strong></p>
 <h2 class="tabset tabset-fade">Admissions</h2>
 <p><br> <strong>No data available for the reporting period</strong></p>
 <!-- Generate table -->
+<div class="inclusion-table">
+
+</div>
 <!-- Generate monthly initiations plot -->
 <!-- Generate quarterly initiations plot -->
 <!-- Generate age, gestation table -->
@@ -2980,6 +2974,9 @@ Reporting package version: <strong>0.0.2.9001</strong></p>
 <h2 class="tabset tabset-fade">Deliveries</h2>
 <p><br> <strong>No data available for the reporting period</strong></p>
 <!-- Generate table -->
+<div class="inclusion-table">
+
+</div>
 <!-- Generate monthly initiations plot -->
 <!-- Generate quarterly initiations plot -->
 <!-- Generate delivery type and live birth table -->
