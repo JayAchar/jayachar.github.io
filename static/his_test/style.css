@@ -1,0 +1,33 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+.content {
+    margin: 25px 25px;
+    max-width: 60%;
+}
+
+h1 {
+    color: white;
+    background-color: #D32F2F;
+    padding-left: 0.7em;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    width: 8em;
+}
+
+a {
+    color: #757575;
+    margin: 0px 25px;
+}
+
+a:hover {
+    background: #D32F2F;
+    color: white;
+}
+
+a:active {
+    color: #757575;
+}

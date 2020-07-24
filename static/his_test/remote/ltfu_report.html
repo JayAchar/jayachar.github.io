@@ -11,7 +11,7 @@
 
 
 
-<title>Missed appointment report</title>
+<title>Missed clinic visit report</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -2673,20 +2673,6 @@ align-items: center;
 justify-content: flex-start;
 font-variant: small-caps;
 }
-footer {
-display: flex;
-display: -webkit-flex;
-flex-direction: row;
-justify-content: center;
-align-items: flex-end;
-background-color: white;
-height: 3em;
-}
-footer p {
-font-family: Calibri, helvetica, sans-serif;
-font-variant: small-caps;
-font-size: 0.7em;
-}
 .top_stripe {
 display: flex;
 display: -webkit-flex;
@@ -2716,6 +2702,11 @@ border-width: medium;
 
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
 background-color: red;
+}
+
+.inclusion-table {
+display: flex;
+justify-content: space-evenly;
 }
 </style>
 
@@ -2899,26 +2890,25 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Missed appointment report</h1>
+<h1 class="title toc-ignore">Missed clinic visit report</h1>
 
 </div>
 
 
 <div id="report-details" class="section level1">
 <h1>Report details</h1>
-<!-- Reporting month and year: ****   -->
-<p>Reporting date range: <strong>01 January 2009 - 01 January 2010</strong><br />
-Date and time report generated: <strong>12 April 2020, 20:54 CEST</strong><br />
-Reporting package version: <strong>0.0.2.0</strong></p>
-<p>Comments or questions to: <a href="mailto:his@oca.msf.org?subject=EMR_reporting">his@oca.msf.org</a></p>
+<p>Reporting date range: <strong>01 Jan 2009 - 31 Dec 2009</strong><br />
+Date and time report generated: <strong>24 June 2020, 10:01 CEST</strong><br />
+Reporting package version: <strong>0.0.2.9002</strong></p>
+<p>Comments or questions to: <strong><a href="mailto:his@oca.msf.org?subject=EMR_LTFU_report">his@oca.msf.org</a></strong></p>
 <hr>
 </div>
-<div id="missed-appointments" class="section level1 tabset tabset-fade">
-<h1 class="tabset tabset-fade">Missed appointments</h1>
+<div id="missed-clinic-visits" class="section level1 tabset tabset-fade">
+<h1 class="tabset tabset-fade">Missed clinic visits</h1>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
-<p>Since <strong>2009-01-01</strong> a total of <strong>0 patients</strong> missed their appointment and have not been seen in clinic or given a treatment outcome prior to <strong>2010-01-01</strong>.</p>
-<p><br> <strong>No summary information available since no patients were identified who missed appointments during the defined period</strong></p>
+<p>Between <strong>01 Jan 2009 - 31 Dec 2009</strong>, a total of <strong>0 patients</strong> missed their clinic visit and have not been seen in clinic or given a treatment outcome during this period.</p>
+<p><br> <strong>No summary information available since no patients were identified who missed clinic visits during the defined period</strong></p>
 <p><br></p>
 <br><br />
 
@@ -2929,22 +2919,18 @@ Reporting package version: <strong>0.0.2.0</strong></p>
 </div>
 <div id="patient-list" class="section level2 tabset tabset-fade">
 <h2 class="tabset tabset-fade">Patient list</h2>
-<div id="recent-ltfu" class="section level3">
-<h3>Recent LTFU</h3>
-<div id="missed-appointment-in-the-previous-30-days" class="section level4">
-<h4>Missed appointment in the previous 30 days</h4>
-<p><br></p>
-<p><strong>No patients were identified for this table.</strong></p>
-<hr>
+<div id="recent-ltfu" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Recent LTFU</h3>
+<div id="missed-clinic-visit-in-the-previous-30-days" class="section level5">
+<h5>Missed clinic visit in the previous 30 days</h5>
+<p><br> <strong>No data available for the reporting period</strong></p>
 </div>
 </div>
-<div id="long-terrm-ltfu" class="section level3">
-<h3>Long-terrm LTFU</h3>
-<div id="missed-appointment-beyond-the-previous-30-days" class="section level4">
-<h4>Missed appointment beyond the previous 30 days</h4>
-<p><br></p>
-<p><strong>No patients were identified for this table.</strong></p>
-<hr>
+<div id="long-terrm-ltfu" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Long-terrm LTFU</h3>
+<div id="missed-clinic-visit-beyond-the-previous-30-days" class="section level5">
+<h5>Missed clinic visit beyond the previous 30 days</h5>
+<p><br> <strong>No data available for the reporting period</strong></p>
 </div>
 </div>
 </div>
@@ -2952,16 +2938,15 @@ Reporting package version: <strong>0.0.2.0</strong></p>
 <h2>Definitions</h2>
 <p><strong>Patients are included in this list if they:</strong></p>
 <ul>
-<li><p>Have been identified to have started treatment in <code>2_treatment_initiation_début_de_traitement</code> at any time prior to the end of reporting date, <strong>and</strong></p></li>
-<li><p>Missed an appointment within the reporting period, <strong>and</strong></p></li>
+<li><p>Missed a clinic visit within the reporting period, <strong>and</strong></p></li>
 <li><p>Have not been given an outcome that defines the end of follow-up (LTFU, death, transfer out) prior to the end of reporting date, <strong>and</strong></p></li>
 <li><p>Have not returned to clinic prior to the end of reporting date</p></li>
 </ul>
 <hr>
+<p><strong>Duplicates:</strong> Where a patient has more than one missed visit in any given list, the visit date closest to the end of the reporting period is retained.</p>
 <p><strong>Key forms:</strong></p>
 <blockquote>
 <p>New patient registration form<br />
-2 Treatment Initiation _ Début de traitement<br />
 4 Clin Assessment DRTB _ Évaluation Clinique TB PR<br />
 4 Clin Assess Treat HIV _ Éval Clin Trait VIH<br />
 4 Clin Assess Treat HCV _ Éval Clin Trait VHC<br />
@@ -2972,22 +2957,6 @@ Reporting package version: <strong>0.0.2.0</strong></p>
 </div>
 </div>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Report footer</title>
-</head>
-<footer>
-    <div id="container1">
-        <p>
-            - developed in 2020 by <a href="https://www.jayachar.org" target="_blank">Jay Achar</a> -
-        </p>
-    </div>
-</footer>
-</html>
 
 
 </div>
@@ -3038,7 +3007,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
