@@ -24,12 +24,27 @@ Modules included: Advanced Statistical Methods in Epidemiology, Modelling and th
 
 ### Employment
 
+<p class="cv-header">Global health consultant</p>
+<p class="cv-detail">2020 - present</p>
+To allow more flexibility in my professional life, I have been providing expert consultation to 
+organisations working with programmes in developing countries and the World Health Organisation. Key
+areas of focus include the development and execution of operational research, training and data 
+managment, analysis and visualisation using HTML, CSS, R and SQL. 
+
+<p class="cv-header">Researcher</p>
+<p class="cv-detail">Department of Medical Epidemiology and Biostatistics, Karolinska Institutet, Stockholm - 2020 - present</p>
+In this part-time role, I'm supporting the development of a text book on statistical methods to
+analyse cohort data including alternative sampling methods, reweighting case-control data and
+extended Cox regression. The work requires advanced knowledge of R, regression modelling and Stata. 
+Future work is likely to include the development of online materials both to support the book and 
+for teaching purposes. 
+
 <p class="cv-header">MSF International Tuberculosis Working Group Leader</p>
-<p class="cv-detail">Manson Unit, M&eacute;decins Sans Fronti&egrave;res UK - 2019 to present</p>
+<p class="cv-detail">Manson Unit, M&eacute;decins Sans Fronti&egrave;res UK - Jan 2019 to Nov 2019</p>
 Within this role, I take responsiblity for coordinating technical advisors for TB across the organisation, justifying and proposing the organisation's strategic direction, representing MSF in our advocacy messaging and at external meetings and committees, while also supporting colleagues on research topics, resource allocation and development of cross-sectional dossiers. 
 
 <p class="cv-header">TB/HIV/Hepatitis and Research Programme Advisor</p>
-<p class="cv-detail">Manson Unit, M&eacute;decins Sans Fronti&egrave;res UK - 2015 to present</p>
+<p class="cv-detail">Manson Unit, M&eacute;decins Sans Fronti&egrave;res UK - 2015 to 2019</p>
 When I joined MSF, this was the job I dreamt of holding. Over the years, I've gained field experience in Belarus, Russia, Tajikistan, Uzbekistan, South Sudan, DR Congo, and Sierra Leone, mixing short strategic visits with longer more comprehensive field support. 
 
 The job also requires justification and planning of a wider portfolio of TB across one section of MSF both through a technical medical and humanitarian lens. 

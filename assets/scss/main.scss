@@ -151,7 +151,6 @@ textarea {
 
 main {
   display: block;
-  margin: 0 auto;
 }
 
 a {
@@ -793,6 +792,10 @@ $comment-content-vsep: 1.5em;
 #site-main {
   grid-area: main;
   max-width: 80ch;
+  justify-self: center;
+  @include for-desktop-up {
+    justify-self: stretch;
+  }
 }
 
 #site-footer {
