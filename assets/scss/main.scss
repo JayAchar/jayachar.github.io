@@ -165,9 +165,9 @@ textarea {
  h1, h2, h3, h4, h5, h6 {
    color: $title-color;
    font-family: $general_font;
-   letter-spacing: 0.25em;
+   letter-spacing: 0.1em;
    line-height: 1.65;
-   text-transform: uppercase;
+  //  text-transform: uppercase;
    word-wrap: break-word;
    a {
      border-bottom: 0;
