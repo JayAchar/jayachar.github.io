@@ -3,7 +3,7 @@
   {{ partial "head" . }}
   <body>
     {{ partial "site-header" . }}
-    <div id="wrapper" class="index">
+    <div id="wrapper">
       {{ partial "site-intro" . }}
       <main id="site-main">
         {{ $paginator := .Paginate (where site.RegularPages "Type" "in" site.Params.mainSections) }}
