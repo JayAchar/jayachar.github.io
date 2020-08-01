@@ -1211,7 +1211,7 @@ $comment-content-vsep: 1.5em;
     }
     header {
       min-height: 4em;
-      padding: 0 1.25em;
+      padding: 0.5em 1.25em;
       position: relative;
       @include for-laptop-up {
         border-top: solid 1px rgba($border-color, 0.3);
@@ -1225,7 +1225,7 @@ $comment-content-vsep: 1.5em;
         font-size: 0.6em;
         font-weight: 400;
         letter-spacing: 0.25em;
-        margin: -0.625em 0 1.7em 0;
+        margin: 0;
         text-transform: uppercase;
       }
       .author,
