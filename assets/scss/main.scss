@@ -1117,11 +1117,14 @@ $comment-content-vsep: 1.5em;
 
 #site-intro {
   align-items: center;
-  display: flex;
+  display: none;
   flex-direction: column;
   margin-top: 0.5em;
   padding: 1em;
   text-align: center;
+  @include for-desktop-up {
+    display: flex;
+  }
   a {
     border: 0;
   }
@@ -1142,6 +1145,13 @@ $comment-content-vsep: 1.5em;
       margin-bottom: 0;
       text-transform: uppercase;
     }
+  }
+}
+
+// Intro on homepage 
+.index {
+  #site-intro {
+    display: flex;
   }
 }
 
