@@ -7,8 +7,11 @@
   {{ template "_internal/twitter_cards.html" . }}
   {{ template "_internal/google_news.html" . }}
 
-  {{ if .Site.Params.highlightjs }}<link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/{{ .Site.Params.highlightjsTheme | default "default" }}.min.css">{{ end }}
+  {{ if .Site.Params.highlightjs }}
+  <link rel="stylesheet"
+      href="{{ "css/highlightjs/solarized-dark.css" | relURL }}">
+      <script src="{{ "js/highlight.pack.js" | relURL}}"></script>
+      <script>hljs.initHighlightingOnLoad();</script>{{ end }}
   {{ range .Site.Params.cssFiles }}
     {{ if eq . "default" }}
       <link rel="stylesheet" href="{{ "css/normalize.css" | relURL}}">

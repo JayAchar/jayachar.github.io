@@ -12,11 +12,10 @@ tags:
   - tidytuesday
 ---
 
-<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
-<script src="/rmarkdown-libs/elevate-section-attrs/elevate-section-attrs.js"></script>
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>For a first blog post, I thought to jump into a great online community called <a href="https://thomasmock.netlify.com/post/tidytuesday-a-weekly-social-data-project-in-r/" target="_blank">#TidyTuesday</a> and add my own small contribution to the weekly event.</p>
+<p>For a first blog post, I thought to jump into a great online community called <a href="https://thomasmock.netlify.com/post/tidytuesday-a-weekly-social-data-project-in-r/" target="_blank" rel="noreferrer">#TidyTuesday</a> and add my own small contribution to the weekly event.</p>
 <p>I must say that a quick search of the Twitter <a href="https://twitter.com/hashtag/tidytuesday?lang=en" target="_blank">hashtag</a> does leave you feeling quite inspired!</p>
 {{% tweet "1120670584881471488" %}}
 <p>Ok - let’s get started…</p>
@@ -44,9 +43,9 @@ do.call(&quot;grid.arrange&quot;, c(hist_list, ncol = 2))</code></pre>
 <pre class="r"><code>final_data &lt;- viz_data %&gt;%
   group_by(year(start_date)) %&gt;%
   summarise(mean_score = mean(score, na.rm = TRUE),
-            mean_score_by = mean(scored_by, na.rm = TRUE))
-
-  ggplot(final_data, aes(x = `year(start_date)`,
+            mean_score_by = mean(scored_by, na.rm = TRUE))</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>  ggplot(final_data, aes(x = `year(start_date)`,
              y = mean_score,
              size = mean_score_by)) +
     geom_point(alpha = 0.5) +
@@ -59,6 +58,7 @@ do.call(&quot;grid.arrange&quot;, c(hist_list, ncol = 2))</code></pre>
        x = &quot;Year&quot;,
        y = &quot;Mean fan score (1-10 worst to best)&quot;) +
   theme_ipsum()</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="/post/2019-08-25-anime-tidy-tuesday_files/figure-html/plot-1.png" width="672" /></p>
 <p>Should we use a statistical test to check whether there’s strong evidence within this data set against the null that there’s no association between time and mean score? Why not…</p>
 <pre class="r"><code>library(broom)

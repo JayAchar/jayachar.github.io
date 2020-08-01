@@ -3,7 +3,7 @@ DefaultContentLanguage  = "en"
 title                   = "Jay Achar"
 theme                   = "hugo-future-imperfect-slim"
 preserveTaxonomyNames   = true
-paginate                = 3
+paginate                = 5
 disqusShortname         = ""
 googleAnalytics         = "UA-128985004-3"
 pluralizeListTitles     = false
@@ -21,7 +21,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   jsFiles               = ["default"]
   # Sets options for highlight.js
   highlightjs           = true
-  highlightjsTheme      = "github"
+  highlightjsTheme      = "solarized-dark"
   highlightjsLang       = ["html", "css", "js", "toml", "r"]
   # Sets where "View More Posts" links to
   viewMorePostsLink     = "/post/"
