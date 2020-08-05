@@ -200,10 +200,11 @@ blockquote {
 code {
   border: solid 1px rgba($border-color, 0.3);
   font-family: $code_font;
+  color: $accent-color;
   font-size: 0.9em;
-  background: #f8f8f8;
+  background: rgba($border-color, 0.1);
   margin: 0 0.25em;
-  padding: 0.25em 0.5em;
+  padding: 0.1em 0.2em;
   overflow-x: auto;
   &::-webkit-scrollbar {
     height: 0.25em;
