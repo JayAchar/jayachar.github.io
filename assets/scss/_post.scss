@@ -11,9 +11,7 @@
     text-align: justify;
   }
   > header {
-    border-bottom: solid 1px rgba($border-color, 0.3);
-    // margin: 1em 1em 0 1em;
-    padding: 1em 0;
+    padding-top: 1em;
     text-align: center;
     @include for-laptop-up {
       display: flex;
@@ -69,6 +67,8 @@
   > footer {
     display: flex;
     flex-direction: column;
+    border-bottom: solid 1px rgba($border-color, 0.3);
+    padding-bottom: 1em;
     .stats {
       display: flex;
       cursor: default;
