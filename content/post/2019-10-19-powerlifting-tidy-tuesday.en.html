@@ -9,10 +9,11 @@ tags:
   - tidytuesday
   - R
 description: 'Practicing with tidybayes'
-featured: "bled.jpg"
-featuredalt: "Lake Bled landscape"
+featured: "gym-sign.jpeg"
+featuredalt: "Gym-sign"
 ---
 
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>This week’s <a href="https://thomasmock.netlify.com/post/tidytuesday-a-weekly-social-data-project-in-r/" target="_blank">#TidyTuesday</a> topic is international powerlifting. While it’s certainly not a topic I know much about or am particularly interested in, the description of the data suggests there’s plenty to dig into.</p>
@@ -22,61 +23,299 @@ featuredalt: "Lake Bled landscape"
 <p>Let’s start by importing the data from the <a href="https://github.com/rfordatascience/tidytuesday" target="_blank">Tidy Tuesday Github repo</a> and taking a quick look at it’s structure.</p>
 <pre class="r"><code>ipf_lifts &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-10-08/ipf_lifts.csv&quot;)</code></pre>
 <pre class="r"><code>glimpse(ipf_lifts)</code></pre>
-<pre><code>## Observations: 41,152
-## Variables: 16
-## $ name             &lt;chr&gt; &quot;Hiroyuki Isagawa&quot;, &quot;David Mannering&quot;, &quot;Eddy Pe…
-## $ sex              &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M…
-## $ event            &lt;chr&gt; &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;…
-## $ equipment        &lt;chr&gt; &quot;Single-ply&quot;, &quot;Single-ply&quot;, &quot;Single-ply&quot;, &quot;Sing…
-## $ age              &lt;dbl&gt; NA, 24.0, 35.5, 19.5, NA, NA, 32.5, 31.5, NA, N…
-## $ age_class        &lt;chr&gt; NA, &quot;24-34&quot;, &quot;35-39&quot;, &quot;20-23&quot;, NA, NA, &quot;24-34&quot;,…
-## $ division         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ bodyweight_kg    &lt;dbl&gt; 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 90.0,…
-## $ weight_class_kg  &lt;chr&gt; &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;,…
-## $ best3squat_kg    &lt;dbl&gt; 205.0, 225.0, 245.0, 195.0, 240.0, 200.0, 220.0…
-## $ best3bench_kg    &lt;dbl&gt; 140.0, 132.5, 157.5, 110.0, 140.0, 100.0, 140.0…
-## $ best3deadlift_kg &lt;dbl&gt; 225.0, 235.0, 270.0, 240.0, 215.0, 230.0, 235.0…
-## $ place            &lt;chr&gt; &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;1&quot;, &quot;2&quot;, &quot;2…
-## $ date             &lt;date&gt; 1985-08-03, 1985-08-03, 1985-08-03, 1985-08-03…
-## $ federation       &lt;chr&gt; &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;…
-## $ meet_name        &lt;chr&gt; &quot;World Games&quot;, &quot;World Games&quot;, &quot;World Games&quot;, &quot;W…</code></pre>
+<pre><code>## Rows: 41,152
+## Columns: 16
+## $ name             &lt;chr&gt; &quot;Hiroyuki Isagawa&quot;, &quot;David Mannering&quot;, &quot;Eddy Pengell…
+## $ sex              &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M…
+## $ event            &lt;chr&gt; &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SBD&quot;, &quot;SB…
+## $ equipment        &lt;chr&gt; &quot;Single-ply&quot;, &quot;Single-ply&quot;, &quot;Single-ply&quot;, &quot;Single-pl…
+## $ age              &lt;dbl&gt; NA, 24.0, 35.5, 19.5, NA, NA, 32.5, 31.5, NA, NA, NA…
+## $ age_class        &lt;chr&gt; NA, &quot;24-34&quot;, &quot;35-39&quot;, &quot;20-23&quot;, NA, NA, &quot;24-34&quot;, &quot;24-…
+## $ division         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+## $ bodyweight_kg    &lt;dbl&gt; 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 67.5, 90.0, 90.0…
+## $ weight_class_kg  &lt;chr&gt; &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.5&quot;, &quot;67.…
+## $ best3squat_kg    &lt;dbl&gt; 205.0, 225.0, 245.0, 195.0, 240.0, 200.0, 220.0, 295…
+## $ best3bench_kg    &lt;dbl&gt; 140.0, 132.5, 157.5, 110.0, 140.0, 100.0, 140.0, 215…
+## $ best3deadlift_kg &lt;dbl&gt; 225.0, 235.0, 270.0, 240.0, 215.0, 230.0, 235.0, 335…
+## $ place            &lt;chr&gt; &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;1&quot;, &quot;2&quot;, &quot;2&quot;, &quot;3…
+## $ date             &lt;date&gt; 1985-08-03, 1985-08-03, 1985-08-03, 1985-08-03, 198…
+## $ federation       &lt;chr&gt; &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IPF&quot;, &quot;IP…
+## $ meet_name        &lt;chr&gt; &quot;World Games&quot;, &quot;World Games&quot;, &quot;World Games&quot;, &quot;World …</code></pre>
 <p>So, it looks like each lifter’s efforts in different events are represented by a single row resulting in 41152 rows…impressive.</p>
 <p>What about some summary statistics to get another view of this huge data set:</p>
 <pre class="r"><code>ipf_lifts %&gt;% skim()</code></pre>
-<pre><code>## Skim summary statistics
-##  n obs: 41152 
-##  n variables: 16 
-## 
-## ── Variable type:character ──────────────────────────────────────────────────────
-##         variable missing complete     n min max empty n_unique
-##        age_class    2884    38268 41152   4   6     0       16
-##         division     627    40525 41152   4  11     0       12
-##        equipment       0    41152 41152   3  10     0        3
-##            event       0    41152 41152   1   3     0        3
-##       federation       0    41152 41152   3   3     0        1
-##        meet_name       0    41152 41152  11  54     0       30
-##             name       0    41152 41152   2  36     0    17803
-##            place       0    41152 41152   1   2     0       34
-##              sex       0    41152 41152   1   1     0        2
-##  weight_class_kg       1    41151 41152   2   5     0       38
-## 
-## ── Variable type:Date ───────────────────────────────────────────────────────────
-##  variable missing complete     n        min        max     median n_unique
-##      date       0    41152 41152 1973-11-09 2019-08-26 2007-10-14      224
-## 
-## ── Variable type:numeric ────────────────────────────────────────────────────────
-##          variable missing complete     n   mean    sd      p0   p25    p50
-##               age    2906    38246 41152  34.77 14.62    0.5   22.5  31.5 
-##     best3bench_kg    2462    38690 41152 144.68 60.03 -160     97.5 140   
-##  best3deadlift_kg   14028    27124 41152 221.84 63.72 -215    170   222.5 
-##     best3squat_kg   13698    27454 41152 217.55 74.61 -210    160   215   
-##     bodyweight_kg     187    40965 41152  81.15 24.93   37.29  60    75.55
-##    p75  p100     hist
-##   45    93.5 ▁▇▆▅▃▂▁▁
-##  185   415   ▁▁▁▇▇▃▁▁
-##  270   420   ▁▁▁▁▆▇▆▁
-##  270   490   ▁▁▁▃▇▇▂▁
-##   97.3 240   ▆▇▅▂▁▁▁▁</code></pre>
+<table>
+<caption><span id="tab:data-summary">Table 1: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">41152</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">16</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">10</td>
+</tr>
+<tr class="odd">
+<td align="left">Date</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">5</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">name</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">2</td>
+<td align="right">36</td>
+<td align="right">0</td>
+<td align="right">17803</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">sex</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">event</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">equipment</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">3</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">age_class</td>
+<td align="right">2884</td>
+<td align="right">0.93</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">16</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">division</td>
+<td align="right">627</td>
+<td align="right">0.98</td>
+<td align="right">4</td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">12</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">weight_class_kg</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">38</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">place</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">34</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">federation</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">meet_name</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">11</td>
+<td align="right">54</td>
+<td align="right">0</td>
+<td align="right">30</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: Date</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">min</th>
+<th align="left">max</th>
+<th align="left">median</th>
+<th align="right">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">date</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">1973-11-09</td>
+<td align="left">2019-08-26</td>
+<td align="left">2007-10-14</td>
+<td align="right">224</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">age</td>
+<td align="right">2906</td>
+<td align="right">0.93</td>
+<td align="right">34.77</td>
+<td align="right">14.62</td>
+<td align="right">0.50</td>
+<td align="right">22.5</td>
+<td align="right">31.50</td>
+<td align="right">45.0</td>
+<td align="right">93.5</td>
+<td align="left">▂▇▅▂▁</td>
+</tr>
+<tr class="even">
+<td align="left">bodyweight_kg</td>
+<td align="right">187</td>
+<td align="right">1.00</td>
+<td align="right">81.15</td>
+<td align="right">24.93</td>
+<td align="right">37.29</td>
+<td align="right">60.0</td>
+<td align="right">75.55</td>
+<td align="right">97.3</td>
+<td align="right">240.0</td>
+<td align="left">▇▆▂▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">best3squat_kg</td>
+<td align="right">13698</td>
+<td align="right">0.67</td>
+<td align="right">217.55</td>
+<td align="right">74.61</td>
+<td align="right">-210.00</td>
+<td align="right">160.0</td>
+<td align="right">215.00</td>
+<td align="right">270.0</td>
+<td align="right">490.0</td>
+<td align="left">▁▁▇▇▁</td>
+</tr>
+<tr class="even">
+<td align="left">best3bench_kg</td>
+<td align="right">2462</td>
+<td align="right">0.94</td>
+<td align="right">144.68</td>
+<td align="right">60.03</td>
+<td align="right">-160.00</td>
+<td align="right">97.5</td>
+<td align="right">140.00</td>
+<td align="right">185.0</td>
+<td align="right">415.0</td>
+<td align="left">▁▁▇▃▁</td>
+</tr>
+<tr class="odd">
+<td align="left">best3deadlift_kg</td>
+<td align="right">14028</td>
+<td align="right">0.66</td>
+<td align="right">221.84</td>
+<td align="right">63.72</td>
+<td align="right">-215.00</td>
+<td align="right">170.0</td>
+<td align="right">222.50</td>
+<td align="right">270.0</td>
+<td align="right">420.0</td>
+<td align="left">▁▁▃▇▂</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="missing-data" class="section level2">
 <h2>Missing data</h2>
@@ -119,10 +358,12 @@ featuredalt: "Lake Bled landscape"
 <p>Sex, age, age_class, bodyweight_kg and date seem self-explanatory. Looking at the codebook on the <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-10-08" target="_blank">Tidy Tuesday data page</a> fills in the rest of the gaps.</p>
 <div id="temporal-trends" class="section level2">
 <h2>Temporal trends</h2>
-<p>Let’s take a look at how many rows there are per unit time:
-<img src="/post/2019-10-19-powerlifting-tidy-tuesday.en_files/figure-html/rows-by-year-1.png" width="672" /></p>
+<p>Let’s take a look at how many rows there are per unit time:</p>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2019-10-19-powerlifting-tidy-tuesday.en_files/figure-html/rows-by-year-1.png" width="672" /></p>
 <p>That either suggests there are more events or that there are more participants at each event in recent years. The distribution does seem to be affected by some higher outliers in the last decade rather than there being a consistent upward trend.</p>
 <p>Are there other temporal relationships to consider?</p>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="/post/2019-10-19-powerlifting-tidy-tuesday.en_files/figure-html/gender-by-year-1.png" width="672" /></p>
 <p>The temporal trend in the quantity of data seems reasonably consistent across gender where data quantity is consistently lower for women than men.</p>
 <p>How about bodyweight? Are lifters getting heavier or lighter over time? I’ll plot the distributions of male powerlifters to check whether we can see any temporal change in medians or distributions. I’m using the <a href="https://mjskay.github.io/tidybayes/index.html" target="_blank">tidybayes package</a> for this which includes a number of geoms_* and stats_* within the Github development version.</p>
