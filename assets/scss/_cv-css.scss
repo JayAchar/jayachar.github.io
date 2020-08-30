@@ -1,23 +1,23 @@
 // CSS for CV page specific
 
- .cv-header {
-     color: #3c3b3b;
-     font-family: "Raleway", Helvetica, sans-serif;
-     letter-spacing: 1px;
-     font-weight: 700;
-     margin-bottom: 2px;
- }
+.cv-header {
+  color: $title-color;
+  font-family: 'Raleway', Helvetica, sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
 
- .cv-detail {
-     color: #AAAAAA;
-     font-weight: 100;
-     margin: 2px 0px;
-     padding-left: 12px;
- }
+.cv-detail {
+  color: $detail-color;
+  font-weight: 100;
+  margin: 2px 0;
+  padding-left: 12px;
+}
 
- .cv-feature {
-     color: #3c3b3b;
-     font-weight: 600;
-     margin: 2px 0px;
-     padding-left: 12px;
- }
+.cv-feature {
+  color: $title-color;
+  font-weight: 600;
+  margin: 2px 0;
+  padding-left: 12px;
+}

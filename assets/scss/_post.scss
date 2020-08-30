@@ -1,15 +1,14 @@
 // Post class
 
 .post {
-  background: #ffffff;
+  background: $background-color;
   margin: 0;
-  // margin: 1.5em auto;
-  // padding: 1em;
-  // child p of .post in post list page
+
   > p {
     padding: 0 1em;
     text-align: justify;
   }
+
   > header {
     padding-top: 1em;
     text-align: center;
@@ -18,14 +17,15 @@
       justify-content: space-between;
       text-align: left;
     }
+
     div {
-      padding: 0 0 1em 0;
+      padding: 0 0 1em;
       @include for-laptop-up {
         padding: 2em 1em;
       }
     }
     p {
-      margin: -1em 0 0 0;
+      margin: -1em 0 0;
     }
     .title {
       font-size: 1.1em;
@@ -34,23 +34,23 @@
       display: flex;
       flex-direction: column;
       @include for-laptop-up {
-        border-left: solid 1px rgba($border-color, 0.3);
+        border-left: solid 1px rgba($border-color, .3);
         text-align: right;
         width: 12em;
       }
       .published {
-        font-family: $general_font;
-        font-size: 0.7em;
+        font-family: $general-font;
+        font-size: .7em;
         font-weight: 800;
-        letter-spacing: 0.25em;
+        letter-spacing: .25em;
         text-transform: uppercase;
       }
       p,
       .author,
       .format {
-        font-family: $general_font;
-        font-size: 0.6em;
-        letter-spacing: 0.25em;
+        font-family: $general-font;
+        font-size: .6em;
+        letter-spacing: .25em;
         text-transform: uppercase;
       }
     }
@@ -60,18 +60,18 @@
     h1 {
       margin: 1em 0em;
     }
+    margin: 1em;
     text-align: left;
-    margin: 1em 1em;
   }
 
   > footer {
+    border-bottom: solid 1px rgba($border-color, .3);
     display: flex;
     flex-direction: column;
-    border-bottom: solid 1px rgba($border-color, 0.3);
     padding-bottom: 1em;
     .stats {
-      display: flex;
       cursor: default;
+      display: flex;
       justify-content: space-around;
       list-style: none;
       margin: 0.5em 0;
@@ -86,10 +86,10 @@
         &:active {
           ul {
             li {
-              visibility: visible;
-              opacity: 1;
               line-height: 1;
               margin: 1em;
+              opacity: 1;
+              visibility: visible;
               width: auto;
             }
           }
@@ -114,7 +114,7 @@
           padding: 0 0 0 1em;
           li {
             visibility: visible;
-            font-family: $general_font;
+            font-family: $general-font;
             font-size: 0.6em;
             font-weight: 400;
             letter-spacing: 0.25em;

@@ -9,8 +9,8 @@ tags:
   - tidytuesday
   - R
 description: 'Practicing with tidybayes'
-featured: "bled.jpg"
-featuredalt: "Lake Bled landscape"
+featured: "gym-sign.jpeg"
+featuredalt: "Gym-sign"
 ---
 ```{r setup, include=FALSE}
 library(tidyverse)
