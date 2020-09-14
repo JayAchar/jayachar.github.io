@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #fff;
+  color: #fff;
+}
+
+nav {
+  width: 100vw;
+  height: 3rem;
+  background-color: #303f9f;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-item {
+  color: #fff;
+  padding: 10px;
+}
