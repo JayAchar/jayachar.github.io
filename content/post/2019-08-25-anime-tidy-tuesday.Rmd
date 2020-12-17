@@ -20,10 +20,6 @@ For a first blog post, I thought to jump into a great online community called [#
 
 I must say that a quick search of the Twitter [hashtag](https://twitter.com/hashtag/tidytuesday?lang=en){target="_blank"} does leave you feeling quite inspired!
 
-```{r echo = FALSE}
-blogdown::shortcode("tweet", "1120670584881471488")
-```
-
 Ok - let's get started...
 
 ```{r read-in, message = FALSE}
